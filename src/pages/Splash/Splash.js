@@ -2,17 +2,18 @@
 import React from 'react';
 import {
   View,
-  ImageBackground,
-  Text,
+  Image,
 } from 'react-native';
 
 import { styles } from './styles';
-import Button from '../../components/Button';
 
 const Splash = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Splash</Text>
+      <Image
+        style={styles.splash_Icon}
+        resizeMode='contain'
+        source={require('../../assets/SplashIcon.png')} />
     </View >
   );
 };
