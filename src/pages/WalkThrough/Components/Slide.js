@@ -1,9 +1,9 @@
 import { TouchableOpacity, View } from "react-native"
-import { styles } from "../styles"
-import { useRef } from "react"
 import { useNavigation } from '@react-navigation/native';
+
 import Title from "../../../components/Title"
 import Colors from "../../../styles/Colors"
+import { styles } from "../styles"
 import { changeSlide } from "./CallBack"
 
 export const Slide = ({ swiperRef }) => {
@@ -23,7 +23,7 @@ export const Slide = ({ swiperRef }) => {
                 <TouchableOpacity onPress={handleSkip}>
                     <Title color={Colors.black} weight={'600'} title={'Skip'} type={`Poppin-14`} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => changeSlide(swiperRef)}>
+                <TouchableOpacity onPress={() => changeSlide(swiperRef,navigation)}>
                     <Title color={Colors.black} weight={'600'} title={'Next'} type={`Poppin-14`} />
                 </TouchableOpacity>
             </View>

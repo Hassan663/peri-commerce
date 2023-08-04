@@ -12,21 +12,26 @@ import Colors from '../../../styles/Colors';
 import { styles } from '../styles';
 import { useState } from 'react';
 
-const OutlinedTextInput = ({ title, Password }) => {
-  
-  const [open, setOpen] = useState(true)
+const OutlinedTextInput = ({ title, val, Password, onChange }) => {
 
+  const [open, setOpen] = useState(true)
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.textInputContainer}>
         {!Password ?
-          <TextInput style={styles.input(false)} />
+          <TextInput
+            value={val}
+            onChangeText={(val) => onChange(val)}
+            secureTextEntry={Password ? true : false}
+            style={styles.input(false)} />
           :
           <>
             <View style={styles.passwordContainer}>
               <View style={{ flex: 9, }}>
                 <TextInput
+                  value={val}
+                  onChangeText={(val) => onChange(val)}
                   secureTextEntry={Password ? true : false}
                   style={styles.input(true)} />
               </View>

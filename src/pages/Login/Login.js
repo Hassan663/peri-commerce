@@ -1,5 +1,7 @@
 // @app
-import React from 'react';
+import React, {
+  useState
+} from 'react';
 import {
   Image,
   ScrollView,
@@ -17,8 +19,13 @@ import Colors from '../../styles/Colors';
 import OutlinedTextInput from './Components/OutlinedTextInput';
 import Button from '../../components/Button';
 import { styles } from './styles';
+import { handleLogin } from './Components/CallBack';
 
 const Login = ({ navigation }) => {
+
+  const [email, setEmail] = useState('mynameismuzammilhussainshah@gmail.com');
+  const [password, setPassword] = useState('123456');
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -38,9 +45,18 @@ const Login = ({ navigation }) => {
             type={'Poppin-16'} />
         </View>
 
-        <OutlinedTextInput title={'Email'} />
-        <OutlinedTextInput title={'Password'} Password />
-        
+        <OutlinedTextInput
+          val={email}
+          onChange={(val) => {
+            console.log(val, 'dasad')
+            setEmail(val)
+          }}
+          title={'Email'} />
+        <OutlinedTextInput
+          val={password}
+          onChange={(val) => { setPassword(val) }}
+          title={'Password'} Password />
+
         <View style={styles.selfEnd}>
           <Title
             title={`Forgot Password`}
@@ -50,9 +66,9 @@ const Login = ({ navigation }) => {
         </View>
 
         <View style={styles.btnWrapper}>
-          <Button title={'Sign In'} primary />
+          <Button callBack={() => handleLogin(email, password, navigation)} title={'Sign In'} primary />
         </View>
-        
+
         <View style={styles.rowWrapper}>
           <Title
             title={`Don’t have account. `}
@@ -65,7 +81,7 @@ const Login = ({ navigation }) => {
             weight={'600'}
             type={'Poppin-14'} />
         </View>
-        
+
         <View style={styles.rowWrapper}>
           <Title
             title={`Or Sign in with social media`}

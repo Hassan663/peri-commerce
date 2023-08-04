@@ -19,6 +19,7 @@ const WalkThrough = ({ navigation }) => {
       <Swiper
         showsPagination={false}
         ref={swiperRef2}
+        autoplay={true}
         loop={false}
         style={styles.wrapper}
         showsButtons={false}
