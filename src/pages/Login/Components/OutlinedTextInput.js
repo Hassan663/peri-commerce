@@ -3,8 +3,8 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import {
   View,
   TextInput,
-  StyleSheet,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 
@@ -13,29 +13,39 @@ import { styles } from '../styles';
 import { useState } from 'react';
 
 const OutlinedTextInput = ({ title, Password }) => {
+  
   const [open, setOpen] = useState(true)
+
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.title}>{title}</Text>
-      <View style={{ flexDirection: 'row', backgroundColor: "red", width: "100%" }}>
+      <View style={styles.textInputContainer}>
         {!Password ?
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input(false)} />
           :
           <>
-            <View style={{ flex: 9, backgroundColor: 'red' }}>
-              <TextInput secureTextEntry={Password ? true : false} style={styles.input} />
+            <View style={styles.passwordContainer}>
+              <View style={{ flex: 9, }}>
+                <TextInput
+                  secureTextEntry={Password ? true : false}
+                  style={styles.input(true)} />
+              </View>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => setOpen(!open)}
+                style={styles.eyeContainer}>
+                <Feather
+                  color={Colors.black}
+                  size={RFPercentage(3)}
+                  name={open ? 'eye-off' : `eye`}
+                />
+              </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, backgroundColor: 'blue' ,justifyContent:'center',alignItems:"center"}}>
-              <Feather
-                color={Colors.black}
-                size={RFPercentage(3)}
-                name={open ? 'eye-off' : `eye`}
-              />
-            </View>
+
           </>
         }
       </View>
-    </View>
+    </View >
   );
 };
 

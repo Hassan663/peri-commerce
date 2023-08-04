@@ -1,13 +1,22 @@
 // @app
 import React from 'react';
-import { Image, ScrollView, View, } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  View,
+  SafeAreaView,
+  TouchableOpacity
+} from 'react-native';
 
-import { styles } from './styles';
-import { SafeAreaView } from 'react-native';
+import { RFPercentage } from 'react-native-responsive-fontsize';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
 import OutlinedTextInput from './Components/OutlinedTextInput';
-import { RFPercentage } from 'react-native-responsive-fontsize';
+import Button from '../../components/Button';
+import { styles } from './styles';
 
 const Login = ({ navigation }) => {
   return (
@@ -16,10 +25,53 @@ const Login = ({ navigation }) => {
         <Image style={styles.loginIcon} source={require("../../assets/SplashIcon2.png")} />
         <Title title={`Hey, Login Now.`} color={Colors.black} weight={'600'} type={'Poppin-20'} />
         <View style={styles.subHeading}>
-          <Title title={`Lorem ipsum dolor sit consectetur  elit.`} color={Colors.gray} weight={'400'} type={'Poppin-16'} />
+          <Title
+            title={`Lorem ipsum dolor sit consectetur  elit.`}
+            color={Colors.gray}
+            weight={'400'}
+            type={'Poppin-16'} />
         </View>
         <OutlinedTextInput title={'Email'} />
         <OutlinedTextInput title={'Password'} Password />
+        <View style={styles.selfEnd}>
+          <Title
+            title={`Forgot Password`}
+            color={Colors.red}
+            weight={'400'}
+            type={'Poppin-14'} />
+        </View>
+        <View style={styles.btnWrapper}>
+          <Button title={'Sign In'} primary />
+        </View>
+        <View style={styles.rowWrapper}>
+          <Title
+            title={`Don’t have account. `}
+            color={Colors.gray}
+            weight={'400'}
+            type={'Poppin-14'} />
+          <Title
+            title={`Sign up`}
+            color={Colors.primary}
+            weight={'600'}
+            type={'Poppin-14'} />
+        </View>
+        <View style={styles.rowWrapper}>
+          <Title
+            title={`Or Sign in with social media`}
+            color={Colors.gray}
+            weight={'400'}
+            type={'Poppin-14'} />
+        </View>
+
+        <View style={styles.rowWrapper}>
+          <TouchableOpacity style={styles.circle}>
+            <EvilIcons name={`sc-facebook`} size={RFPercentage(3.2)} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.circle}>
+            <AntDesign name={`google`} size={RFPercentage(2)} />
+          </TouchableOpacity>
+        </View>
+
       </ScrollView>
     </SafeAreaView >
   );
