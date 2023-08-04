@@ -1,6 +1,6 @@
 // @app
 import React from 'react';
-import { TouchableOpacity, View, } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View, } from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import { useRef } from 'react';
@@ -15,7 +15,7 @@ const WalkThrough = ({ navigation }) => {
   const swiperRef2 = useRef(null)
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Swiper
         showsPagination={false}
         ref={swiperRef2}
@@ -27,7 +27,7 @@ const WalkThrough = ({ navigation }) => {
         <Slide swiperRef={swiperRef2} />
         <Slide swiperRef={swiperRef2} />
       </Swiper>
-    </View >
+    </SafeAreaView >
   );
 };
 export default WalkThrough;

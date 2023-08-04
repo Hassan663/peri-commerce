@@ -6,8 +6,14 @@ import {
 } from 'react-native';
 
 import { styles } from './styles';
+import { useEffect } from 'react';
 
 const Splash = ({ navigation }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('WalkThrough')
+    }, 1000);
+  }, [])
   return (
     <View style={styles.container}>
       <Image
