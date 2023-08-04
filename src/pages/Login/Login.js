@@ -22,8 +22,14 @@ const Login = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Image style={styles.loginIcon} source={require("../../assets/SplashIcon2.png")} />
-        <Title title={`Hey, Login Now.`} color={Colors.black} weight={'600'} type={'Poppin-20'} />
+        <Image
+          style={styles.loginIcon}
+          source={require("../../assets/SplashIcon2.png")} />
+        <Title
+          title={`Hey, Login Now.`}
+          color={Colors.black}
+          weight={'600'}
+          type={'Poppin-20'} />
         <View style={styles.subHeading}>
           <Title
             title={`Lorem ipsum dolor sit consectetur  elit.`}
@@ -31,8 +37,10 @@ const Login = ({ navigation }) => {
             weight={'400'}
             type={'Poppin-16'} />
         </View>
+
         <OutlinedTextInput title={'Email'} />
         <OutlinedTextInput title={'Password'} Password />
+        
         <View style={styles.selfEnd}>
           <Title
             title={`Forgot Password`}
@@ -40,9 +48,11 @@ const Login = ({ navigation }) => {
             weight={'400'}
             type={'Poppin-14'} />
         </View>
+
         <View style={styles.btnWrapper}>
           <Button title={'Sign In'} primary />
         </View>
+        
         <View style={styles.rowWrapper}>
           <Title
             title={`Don’t have account. `}
@@ -55,6 +65,7 @@ const Login = ({ navigation }) => {
             weight={'600'}
             type={'Poppin-14'} />
         </View>
+        
         <View style={styles.rowWrapper}>
           <Title
             title={`Or Sign in with social media`}
