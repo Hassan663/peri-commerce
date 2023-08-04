@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "761704855538",
+    "project_id": "pericommerce-bed04",
+    "storage_bucket": "pericommerce-bed04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761704855538:android:3da8d6ab9eccf40c949d6b",
+        "android_client_info": {
+          "package_name": "com.pericommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761704855538-olml0n1e8saf9vmukip0otic5291679s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTmYOLYfBAirq-lQn4v6iL08spJ_NjZ8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761704855538-olml0n1e8saf9vmukip0otic5291679s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
