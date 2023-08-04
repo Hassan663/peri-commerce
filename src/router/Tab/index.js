@@ -21,7 +21,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName='WalkThrough'
+      initialRouteName='Splash'
     >
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="WalkThrough" component={WalkThrough} />

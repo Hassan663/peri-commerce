@@ -13,7 +13,7 @@ const Splash = ({ navigation }) => {
       <Image
         style={styles.splash_Icon}
         resizeMode='contain'
-        source={require('../../assets/SplashIcon.png')} />
+        source={require('../../assets/SplashIcon2.png')} />
     </View >
   );
 };
