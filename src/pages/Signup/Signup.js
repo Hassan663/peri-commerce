@@ -13,7 +13,6 @@ import {
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
@@ -34,13 +33,11 @@ const Signup = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{
-          marginTop: RFPercentage(10),
-          flexDirection: 'row',
-          marginTop: RFPercentage(10),
-          alignItems: "center", marginTop: RFPercentage(5),
-        }}>
-          <AntDesign size={RFPercentage(2)} color={Colors.primary} name={'left'} />
+        <View style={styles.backBtnContainer}>
+          <AntDesign
+            size={RFPercentage(2)}
+            color={Colors.primary}
+            name={'left'} />
           <Title
             title={`Back`}
             color={Colors.primary}
@@ -90,7 +87,7 @@ const Signup = ({ navigation }) => {
           {isCheck ?
             <AntDesign name={'checksquareo'} size={RFPercentage(2.5)} />
             :
-            <View style={{ height: RFPercentage(2.5), width: RFPercentage(2.5), backgroundColor: Colors.lightGray }}></View>
+            <View style={styles.squareContainer}></View>
           }
           <View style={{ marginLeft: RFPercentage(1) }}>
             <Title
@@ -117,7 +114,10 @@ const Signup = ({ navigation }) => {
         </TouchableOpacity>
 
         <View style={styles.btnWrapper}>
-          <Button callBack={() => handleLogin(email, password, navigation)} title={'Sign Up'} primary />
+          <Button
+            callBack={() => handleLogin(email, password, navigation)}
+            title={'Sign Up'}
+            primary />
         </View>
 
         <View style={styles.rowWrapper}>

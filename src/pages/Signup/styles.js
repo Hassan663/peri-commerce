@@ -99,5 +99,16 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         margin: RFPercentage(1)
     },
+    backBtnContainer: {
+        marginTop: RFPercentage(10),
+        flexDirection: 'row',
+        marginTop: RFPercentage(10),
+        alignItems: "center", marginTop: RFPercentage(5),
+    },
+    squareContainer: {
+        height: RFPercentage(2.5),
+        width: RFPercentage(2.5),
+        backgroundColor: Colors.lightGray
+    },
 
 });
