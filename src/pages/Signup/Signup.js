@@ -21,7 +21,7 @@ import Colors from '../../styles/Colors';
 import OutlinedTextInput from './Components/OutlinedTextInput';
 import Button from '../../components/Button';
 import { styles } from './styles';
-import { handleLogin } from './Components/CallBack';
+import { handleSignup } from './Components/CallBack';
 
 const Signup = ({ navigation }) => {
 
@@ -31,83 +31,6 @@ const Signup = ({ navigation }) => {
   const [password, setPassword] = useState('123456');
   const [confirmPassword, setConfirmPassword] = useState('12345');
   const [isCheck, setisCheck] = useState(false);
-
-
-  // const handleSignup = async () => {
-  //   try {
-  //     if (password !== confirmPassword) {
-  //       // Passwords don't match
-  //       alert('Passwords do not match');
-  //       return;
-  //     }
-
-  //     // Create user with email and password
-  //     await auth().createUserWithEmailAndPassword(email, password);
-
-  //     // Update user display name
-  //     const user = auth().currentUser;
-  //     if (user) {
-  //       await user.updateProfile({
-  //         displayName: firstName + ' ' + lastName,
-  //       });
-  //     }
-
-  //     // Navigate to another screen (you can customize this part)
-  //     navigation.navigate('Login'); // Change 'SignIn' to your actual screen name
-  //   } catch (error) {
-  //     console.error('Signup error:', error.message);
-  //     // Handle error (show error message to user, etc.)
-  //   }
-  // };
-
-  const handleSignup = async () => {
-    try {
-      if (!validateEmail(email)) {
-        Alert.alert('Invalid Email', 'Please enter a valid email address.');
-        return;
-      }
-
-      if (!validateName(firstName) || !validateName(lastName)) {
-        Alert.alert('Invalid Name', 'Please enter a valid first and last name.');
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        Alert.alert('Password Mismatch', 'Passwords do not match.');
-        return;
-      }
-
-      // Create user with email and password
-      await auth().createUserWithEmailAndPassword(email, password);
-
-      // Update user display name
-      const user = auth().currentUser;
-      if (user) {
-        await user.updateProfile({
-          displayName: firstName + ' ' + lastName,
-        });
-      }
-
-      // Navigate to another screen (you can customize this part)
-      navigation.navigate('Login'); // Change 'SignIn' to your actual screen name
-    } catch (error) {
-      console.error('Signup error:', error.message);
-      // Handle error (show error message to user, etc.)
-    }
-  };
-
-  const validateEmail = (email) => {
-    // Very basic email validation, you can use a more robust method
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return pattern.test(email);
-  };
-
-  const validateName = (name) => {
-    // Basic name validation, allowing only alphabets and spaces
-    const pattern = /^[A-Za-z\s]+$/;
-    return pattern.test(name);
-  };
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -120,7 +43,7 @@ const Signup = ({ navigation }) => {
           <Title
             title={`Back`}
             color={Colors.primary}
-            weight={'400'}
+            weight={'600'}
             type={'Poppin-16'} />
         </View>
         <Image
@@ -194,7 +117,7 @@ const Signup = ({ navigation }) => {
 
         <View style={styles.btnWrapper}>
           <Button
-            callBack={() => handleSignup(email, password, navigation)}
+            callBack={() => handleSignup(email, password, confirmPassword, firstName, lastName, navigation)}
             title={'Sign Up'}
             primary />
         </View>
