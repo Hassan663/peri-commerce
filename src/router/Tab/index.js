@@ -9,6 +9,7 @@ import Splash from '../../pages/Splash/Splash';
 import WalkThrough from '../../pages/WalkThrough/WalkThrough';
 import Login from '../../pages/Login/Login';
 import Home from '../../pages/Home/Home';
+import Signup from '../../pages/Signup/Signup';
 
 export default function Navigation() {
   return (
@@ -24,11 +25,12 @@ function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName='Splash'
+      initialRouteName='Signup'
     >
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="WalkThrough" component={WalkThrough} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
