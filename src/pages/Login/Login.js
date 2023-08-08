@@ -57,13 +57,15 @@ const Login = ({ navigation }) => {
           onChange={(val) => { setPassword(val) }}
           title={'Password'} Password />
 
-        <View style={styles.selfEnd}>
+        <TouchableOpacity activeOpacity={.8}
+          onPress={() => navigation.navigate('ForgetPass')}
+          style={styles.selfEnd}>
           <Title
             title={`Forgot Password`}
             color={Colors.red}
             weight={'400'}
             type={'Poppin-14'} />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.btnWrapper}>
           <Button callBack={() => handleLogin(email, password, navigation)} title={'Sign In'} primary />
@@ -75,11 +77,15 @@ const Login = ({ navigation }) => {
             color={Colors.gray}
             weight={'400'}
             type={'Poppin-14'} />
-          <Title
-            title={`Sign up`}
-            color={Colors.primary}
-            weight={'600'}
-            type={'Poppin-14'} />
+          <TouchableOpacity
+            activeOpacity={.8}
+            onPress={() => navigation.navigate('Signup')}>
+            <Title
+              title={`Sign up`}
+              color={Colors.primary}
+              weight={'600'}
+              type={'Poppin-14'} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.rowWrapper}>

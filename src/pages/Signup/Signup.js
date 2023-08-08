@@ -126,11 +126,13 @@ const Signup = ({ navigation }) => {
             color={Colors.gray}
             weight={'400'}
             type={'Poppin-14'} />
-          <Title
-            title={`Sign in`}
-            color={Colors.primary}
-            weight={'600'}
-            type={'Poppin-14'} />
+          <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('Login')}>
+            <Title
+              title={`Sign in`}
+              color={Colors.primary}
+              weight={'600'}
+              type={'Poppin-14'} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.rowWrapper}>
