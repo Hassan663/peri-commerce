@@ -17,11 +17,11 @@ import Colors from '../../styles/Colors';
 import OutlinedTextInput from './Components/OutlinedTextInput';
 import Button from '../../components/Button';
 import { styles } from './styles';
-import { handleResetPassword } from './Components/CallBack'
+import { handleResetPassword } from './Components/CallBack';
+
 const ForgetPass = ({ navigation }) => {
 
   const [email, setEmail] = useState('mynameismuzammilhussainshah@gmail.com');
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -61,10 +61,7 @@ const ForgetPass = ({ navigation }) => {
 
         <View style={styles.btnWrapper}>
           <Button
-            callBack={() =>
-              handleResetPassword(email, navigation)
-              // handleResetPassword(email, navigation)
-            }
+            callBack={() => handleResetPassword(email, navigation)}
             title={'Reset Password'}
             primary />
         </View>

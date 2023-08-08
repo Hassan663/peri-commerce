@@ -8,7 +8,6 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
-  Alert
 } from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';

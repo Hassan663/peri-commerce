@@ -11,7 +11,7 @@ export const handleResetPassword = async (email) => {
         await auth().sendPasswordResetEmail(email);
         Alert.alert('Password Reset', 'An email has been sent to reset your password.');
     } catch (error) {
+        Alert.alert(error.message)
         console.error('Password reset error:', error.message);
-        // Handle error (show error message to user, etc.)
     }
 };
