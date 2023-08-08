@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
         height: 100,
         tintColor: Colors.primary,
         resizeMode: "contain",
-        marginTop: RFPercentage(10),
         marginBottom: RFPercentage(0),
         alignSelf: 'center',
         width: 100,
@@ -76,7 +75,9 @@ export const styles = StyleSheet.create({
         height: "85%"
     },
     selfEnd: {
-        alignSelf: "flex-end"
+        flexDirection: 'row',
+        alignItems: "center",
+        margin: RFPercentage(1)
     },
     btnWrapper: {
         height: 55,

@@ -13,6 +13,7 @@ import {
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
@@ -25,18 +26,33 @@ const Signup = ({ navigation }) => {
 
   const [email, setEmail] = useState('mynameismuzammilhussainshah@gmail.com');
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('mynameismuzammilhussainshah@gmail.com');
-  const [password, setPassword] = useState('123456');
-  const [confirmPassword, setConfirmPassword] = useState('123456');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isCheck, setisCheck] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{
+          marginTop: RFPercentage(10),
+          flexDirection: 'row',
+          marginTop: RFPercentage(10),
+          alignItems: "center", marginTop: RFPercentage(5),
+        }}>
+          <AntDesign size={RFPercentage(2)} color={Colors.primary} name={'left'} />
+          <Title
+            title={`Back`}
+            color={Colors.primary}
+            weight={'400'}
+            type={'Poppin-16'} />
+        </View>
         <Image
           style={styles.loginIcon}
           source={require("../../assets/SplashIcon2.png")} />
+
         <Title
-          title={`Hey, Login Now.`}
+          title={`Create your account.`}
           color={Colors.black}
           weight={'600'}
           type={'Poppin-20'} />
@@ -50,53 +66,68 @@ const Signup = ({ navigation }) => {
 
         <OutlinedTextInput
           val={firstName}
-          onChange={(val) => {
-            setFirstName(val)
-          }}
+          onChange={(val) => setFirstName(val)}
           title={'firstName'} />
         <OutlinedTextInput
           val={lastName}
-          onChange={(val) => {
-            console.log(val, 'dasad')
-            setLastName(val)
-          }}
+          onChange={(val) => setLastName(val)}
           title={'lastName'} />
         <OutlinedTextInput
           val={email}
-          onChange={(val) => {
-            console.log(val, 'dasad')
-            setEmail(val)
-          }}
+          onChange={(val) => setEmail(val)}
           title={'Email'} />
         <OutlinedTextInput
           val={password}
-          onChange={(val) => { setPassword(val) }}
+          onChange={(val) => setPassword(val)}
           title={'Password'} Password />
         <OutlinedTextInput
           val={confirmPassword}
-          onChange={(val) => { setPassword(val) }}
+          onChange={(val) => setConfirmPassword(val)}
           title={'confirmPassword'} Password />
-
-        <View style={styles.selfEnd}>
+        <TouchableOpacity
+          style={styles.selfEnd}
+          activeOpacity={.9} onPress={() => { setisCheck(!isCheck) }} >
+          {isCheck ?
+            <AntDesign name={'checksquareo'} size={RFPercentage(2.5)} />
+            :
+            <View style={{ height: RFPercentage(2.5), width: RFPercentage(2.5), backgroundColor: Colors.lightGray }}></View>
+          }
+          <View style={{ marginLeft: RFPercentage(1) }}>
+            <Title
+              title={` I agree to `}
+              color={Colors.gray}
+              weight={'400'}
+              type={'Poppin-12'} />
+          </View>
           <Title
-            title={`Forgot Password`}
-            color={Colors.red}
+            title={`Terms & Conditions`}
+            color={Colors.primary}
             weight={'400'}
-            type={'Poppin-14'} />
-        </View>
+            type={'Poppin-12'} />
+          <Title
+            title={` & `}
+            color={Colors.gray}
+            weight={'400'}
+            type={'Poppin-12'} />
+          <Title
+            title={`Privacy Policy.`}
+            color={Colors.primary}
+            weight={'400'}
+            type={'Poppin-12'} />
+        </TouchableOpacity>
 
         <View style={styles.btnWrapper}>
-          <Button callBack={() => handleLogin(email, password, navigation)} title={'Sign In'} primary />
+          <Button callBack={() => handleLogin(email, password, navigation)} title={'Sign Up'} primary />
         </View>
 
         <View style={styles.rowWrapper}>
           <Title
-            title={`Don’t have account. `}
+            title={`Alread have account. `}
             color={Colors.gray}
             weight={'400'}
             type={'Poppin-14'} />
           <Title
-            title={`Sign up`}
+            title={`Sign in`}
             color={Colors.primary}
             weight={'600'}
             type={'Poppin-14'} />

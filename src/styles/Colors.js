@@ -3,6 +3,7 @@ const Colors = {
     primary: '#32A99A',
     white: "#ffffff",
     gray: '#808080',
+    lightGray: "#E6E6E6",
     red: '#FF3333',
 }
 
