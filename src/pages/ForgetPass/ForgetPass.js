@@ -7,13 +7,9 @@ import {
   ScrollView,
   View,
   SafeAreaView,
-  TouchableOpacity,
-  Alert
 } from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import auth from '@react-native-firebase/auth';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import Title from '../../components/Title';
@@ -21,16 +17,11 @@ import Colors from '../../styles/Colors';
 import OutlinedTextInput from './Components/OutlinedTextInput';
 import Button from '../../components/Button';
 import { styles } from './styles';
-import { handleSignup } from './Components/CallBack';
-
+import { handleResetPassword } from './Components/CallBack'
 const ForgetPass = ({ navigation }) => {
 
   const [email, setEmail] = useState('mynameismuzammilhussainshah@gmail.com');
-  const [firstName, setFirstName] = useState('muzammil ');
-  const [lastName, setLastName] = useState('shah');
-  const [password, setPassword] = useState('123456');
-  const [confirmPassword, setConfirmPassword] = useState('12345');
-  const [isCheck, setisCheck] = useState(false);
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,15 +53,18 @@ const ForgetPass = ({ navigation }) => {
             weight={'400'}
             type={'Poppin-16'} />
         </View>
- 
+
         <OutlinedTextInput
           val={email}
           onChange={(val) => setEmail(val)}
-          title={'Email'} />  
-        
+          title={'Email'} />
+
         <View style={styles.btnWrapper}>
           <Button
-            // callBack={() => handleSignup(email, password, confirmPassword, firstName, lastName, navigation)}
+            callBack={() =>
+              handleResetPassword(email, navigation)
+              // handleResetPassword(email, navigation)
+            }
             title={'Reset Password'}
             primary />
         </View>
@@ -86,7 +80,7 @@ const ForgetPass = ({ navigation }) => {
             color={Colors.primary}
             weight={'600'}
             type={'Poppin-14'} />
-        </View> 
+        </View>
       </ScrollView>
     </SafeAreaView >
   );

@@ -13,7 +13,6 @@ import {
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import auth from '@react-native-firebase/auth';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import Title from '../../components/Title';
