@@ -23,7 +23,6 @@ const OutlinedTextInput = ({ title, val, Password, onChange }) => {
           <TextInput
             value={val}
             onChangeText={(val) => onChange(val)}
-            secureTextEntry={Password ? true : false}
             style={styles.input(false)} />
           :
           <>
@@ -32,7 +31,7 @@ const OutlinedTextInput = ({ title, val, Password, onChange }) => {
                 <TextInput
                   value={val}
                   onChangeText={(val) => onChange(val)}
-                  secureTextEntry={Password ? true : false}
+                  secureTextEntry={open ? true : false}
                   style={styles.input(true)} />
               </View>
               <TouchableOpacity

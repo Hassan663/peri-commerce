@@ -55,7 +55,8 @@ const Login = ({ navigation }) => {
         <OutlinedTextInput
           val={password}
           onChange={(val) => { setPassword(val) }}
-          title={'Password'} Password />
+          title={'Password'}
+           Password />
 
         <TouchableOpacity activeOpacity={.8}
           onPress={() => navigation.navigate('ForgetPass')}
