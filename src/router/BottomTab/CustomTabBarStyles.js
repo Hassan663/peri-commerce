@@ -13,6 +13,8 @@ import {
     getLabel,
     getSize
 } from './callback';
+import Title from '../../components/Title';
+import { RFPercentage } from 'react-native-responsive-fontsize';
 
 export function CustomTabBar({ state, descriptors, navigation }) {
     return (
@@ -47,7 +49,7 @@ export function CustomTabBar({ state, descriptors, navigation }) {
                                 <Icon
                                     name={getIconName(label)}
                                     size={getSize(label, isFocused)}
-                                    color={isFocused ? Colors.white : 'black'}
+                                    color={isFocused ? Colors.white : Colors.primary}
                                 />
                             </View>
                             {isFocused && <Text style={styles.title}>{label}</Text>}

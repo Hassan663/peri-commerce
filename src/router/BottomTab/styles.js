@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     title: {
         color: Colors.primary,
         flex: 1,
+        fontWeight: "700",
         textAlign: "center"
     },
     iconContainer: (isFocused) => ({

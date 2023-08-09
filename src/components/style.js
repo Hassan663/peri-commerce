@@ -5,6 +5,9 @@ export const styles = StyleSheet.create({
     poppin_20: {
         fontSize: 20,
     },
+    poppin_11: {
+        fontSize: 12,
+    },
     poppin_12: {
         fontSize: 12,
     },
