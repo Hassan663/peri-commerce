@@ -27,7 +27,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName='AppTabs'
+      initialRouteName='Splash'
     >
       <Stack.Screen name="AppTabs" component={AppTabs} />
       <Stack.Screen name="Splash" component={Splash} />
