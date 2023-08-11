@@ -5,8 +5,14 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.primary,
-        justifyContent: 'center',
-        alignItems: "center"
+        backgroundColor: Colors.white,
+        paddingHorizontal: RFPercentage(2)
     },
+    circle: (size) => ({
+        height: size,
+        width: size,
+        backgroundColor: Colors.primary,
+        borderRadius: size / 2
+    }
+    )
 });

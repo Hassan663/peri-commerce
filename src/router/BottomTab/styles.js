@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         padding: RFPercentage(3),
-        // height: RFPercentage(5),
 
     },
     title: {
