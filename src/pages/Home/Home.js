@@ -36,17 +36,19 @@ const Home = ({ navigation }) => {
         <View style={{
           height: "100%",
           width: "80%",
-          backgroundColor: Colors.lightGray,
+          backgroundColor: Colors.inputBg,
           paddingHorizontal: RFPercentage(2),
           borderRadius: RFPercentage(4),
           flexDirection: 'row',
           alignItems: "center",
         }}>
           <AntDesign name={`search1`} color={Colors.primary} size={RFPercentage(3)} />
-          <TextInput style={{
-            flex: 1,
-            paddingHorizontal: RFPercentage(1),
-          }} />
+          <TextInput
+            placeholder='Search...'
+            style={{
+              flex: 1,
+              paddingHorizontal: RFPercentage(1),
+            }} />
         </View>
         <View style={{
           height: "100%",

@@ -3,16 +3,36 @@ import Colors from '../../styles/Colors';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 export const styles = StyleSheet.create({
+    mainContainer: {
+        flexDirection: 'row',
+        backgroundColor: 'rgba(243, 244, 245, 0.5)',
+        borderTopLeftRadius: RFPercentage(3),
+        borderTopRightRadius: RFPercentage(3),
+        position: 'absolute',
+        bottom: 0,
+        height: "10%",
+        justifyContent: "center",
+        alignItems: 'flex-end',
+        overflow: 'hidden',
+        width: "100%"
+    },
     container: {
         flexDirection: 'row',
         backgroundColor: Colors.white,
+        height: "95%",
+        width: "100%",
+        alignItems:'center',
+        paddingHorizontal: RFPercentage(3),
         borderTopLeftRadius: RFPercentage(3),
         borderTopRightRadius: RFPercentage(3),
-        elevation: 10,
-        position: 'absolute',
-        bottom: 0,
-        padding: RFPercentage(3),
-
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 11,
+        },
+        shadowOpacity: 0.55,
+        shadowRadius: 14.78,
+        elevation: 22,
     },
     title: {
         color: Colors.primary,
@@ -32,9 +52,12 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: 'center',
-        borderRadius: RFPercentage(2.5),
+        borderRadius: RFPercentage(3),
         width: "100%",
         overflow: 'hidden',
-        backgroundColor: isFocused ? Colors.lightGray : null
+        backgroundColor: isFocused ?
+            Colors.inputBg
+            :
+            null
     }),
 });
