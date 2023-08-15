@@ -57,7 +57,6 @@ const Home = ({ navigation }) => {
           alignItems: "flex-end",
         }}>
           <Image resizeMode='contain' source={require('../../assets/filtter.png')} />
-          {/* <View style={styles.circle(50)}></View> */}
 
         </View>
       </View>
