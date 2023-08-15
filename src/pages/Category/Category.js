@@ -30,7 +30,7 @@ const Category = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-      
+
         <View style={styles.rowContainer}>
           <AntDesign
             name={`left`}
