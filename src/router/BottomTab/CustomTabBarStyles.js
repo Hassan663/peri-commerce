@@ -4,8 +4,7 @@ import {
     View
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome'; // Example icon library, import the desired icon library
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../styles/Colors';
 import { styles } from './styles';
 import {
@@ -13,8 +12,6 @@ import {
     getLabel,
     getSize
 } from './callback';
-import Title from '../../components/Title';
-import { RFPercentage } from 'react-native-responsive-fontsize';
 
 export function CustomTabBar({ state, descriptors, navigation }) {
     return (

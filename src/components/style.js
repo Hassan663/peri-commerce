@@ -20,6 +20,9 @@ export const styles = StyleSheet.create({
     poppin_16: {
         fontSize: 16,
     },
+    poppin_18: {
+        fontSize: 18,
+    },
     primaryBtn: {
         flex: 1,
         backgroundColor: Colors.primary,
