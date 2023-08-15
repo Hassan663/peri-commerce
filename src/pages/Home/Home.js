@@ -89,7 +89,7 @@ const Home = ({ navigation }) => {
           numColumns={2}
           contentContainerStyle={{ marginBottom: RFPercentage(10) }}
           columnWrapperStyle={{ justifyContent: "space-between" }}
-          renderItem={() => <ArrivalCart />}
+          renderItem={() => <ArrivalCart navigation={navigation} />}
           keyExtractor={(item, index) => index.toString()}
         />
 

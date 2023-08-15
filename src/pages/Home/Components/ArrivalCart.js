@@ -3,6 +3,7 @@ import React from 'react';
 import {
     View,
     Image,
+    TouchableOpacity,
 } from 'react-native';
 
 import Title from '../../../components/Title';
@@ -12,7 +13,12 @@ import { styles } from '../styles';
 export const ArrivalCart = ({ navigation }) => {
 
     return (
-        <View style={styles.cartContainer}>
+        <TouchableOpacity
+            activeOpacity={.8}
+            onPress={() => {
+                if (navigation) { navigation.navigate('Category') }
+            }}
+            style={styles.cartContainer}>
             <Image source={require('../../../assets/arrivalItem.png')} style={styles.cartImg} resizeMode='cover' />
             <Image
                 source={require('../../../assets/arrivalItemHeart.png')}
@@ -34,6 +40,6 @@ export const ArrivalCart = ({ navigation }) => {
                 weight={'600'}
                 color={Colors.primary}
                 type={'Poppin-14'} />
-        </View>
+        </TouchableOpacity>
     );
 }; 
