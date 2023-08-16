@@ -12,16 +12,17 @@ import Colors from '../../../styles/Colors';
 import { styles } from '../styles';
 import { useState } from 'react';
 
-const OutlinedTextInput = ({ title, val, Password, onChange }) => {
-
+const OutlinedTextInput = ({ title, val, marginY, Password, placeHolder, onChange }) => {
   const [open, setOpen] = useState(true)
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, { marginVertical: marginY ? marginY : 10 }]}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.textInputContainer}>
         {!Password ?
           <TextInput
             value={val}
+
+            placeholder={placeHolder && placeHolder}
             onChangeText={(val) => onChange(val)}
             style={styles.input(false)} />
           :
@@ -30,6 +31,8 @@ const OutlinedTextInput = ({ title, val, Password, onChange }) => {
               <View style={{ flex: 9, }}>
                 <TextInput
                   value={val}
+
+                  placeholder={placeHolder && placeHolder}
                   onChangeText={(val) => onChange(val)}
                   secureTextEntry={open ? true : false}
                   style={styles.input(true)} />

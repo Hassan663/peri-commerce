@@ -131,7 +131,6 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.inputBg,
         borderRadius: RFPercentage(2),
         alignItems: 'center',
-        // marginBottom: RFPercentage(10),
         marginVertical: RFPercentage(2)
     },
     applyText: {
