@@ -1,5 +1,5 @@
 // @app
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Image,
@@ -12,18 +12,38 @@ import {
 
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import firestore from '@react-native-firebase/firestore';
 
 import Colors from '../../styles/Colors';
 import Title from '../../components/Title';
 import { styles } from './styles';
 import { ArrivalCart } from './Components/ArrivalCart';
 import { Banner } from './Components/Banner';
+import { data } from './DummyData';
 
 const windowWidth = Dimensions.get('window').width;
 const widthFlex1 = windowWidth / 10
 
 const Home = ({ navigation }) => {
+  useEffect(() => {
+    console.log(data, 'data')
 
+    // firestore()
+    //   .collection('New Arrivals')
+    //   .add(data)
+    //   .then(() => {
+    //     console.log('User added!');
+    //   });
+    firestore().collection('New Arrivals').get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+        });
+      })
+      .catch((error) => {
+        console.error("Error getting documents: ", error);
+      });
+  }, [])
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
