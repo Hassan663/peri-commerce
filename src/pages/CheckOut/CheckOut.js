@@ -17,7 +17,7 @@ import OutlinedTextInput from '../Signup/Components/OutlinedTextInput';
 
 const windowHeight = Dimensions.get('window').height;
 
-const Payment = ({ navigation }) => {
+const CheckOut = ({ navigation }) => {
 
   const [addressLine1, setAddressLine1] = useState('')
   const [addressLine2, setAddressLine2] = useState('')
@@ -39,7 +39,11 @@ const Payment = ({ navigation }) => {
               size={RFPercentage(2)}
               style={styles.mr1}
               color={Colors.primary} />
-            <Title title={'Checkout'} type={'Poppin-16'} weight={'600'} color={Colors.primary} />
+            <Title
+              title={'Checkout'}
+              type={'Poppin-16'}
+              weight={'600'}
+              color={Colors.primary} />
           </View>
 
           <View style={styles.rowContainer}>
@@ -124,4 +128,4 @@ const Payment = ({ navigation }) => {
     </SafeAreaView >
   );
 };
-export default Payment;
+export default CheckOut;

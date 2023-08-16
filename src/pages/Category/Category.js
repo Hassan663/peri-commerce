@@ -31,14 +31,16 @@ const Category = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
 
-        <View style={styles.rowContainer}>
+        <TouchableOpacity activeOpacity={.8}
+          onPress={() => navigation.pop()}
+          style={styles.rowContainer}>
           <AntDesign
             name={`left`}
             size={RFPercentage(2)}
             style={styles.mr1}
             color={Colors.primary} />
           <Title title={'Phones'} type={'Poppin-16'} weight={'600'} color={Colors.primary} />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.rowContainer}>
           <AntDesign

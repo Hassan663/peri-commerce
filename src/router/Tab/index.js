@@ -14,8 +14,9 @@ import ForgetPass from '../../pages/ForgetPass/ForgetPass';
 import AppTabs from '../BottomTab/BottomTabs';
 import Category from '../../pages/Category/Category';
 import ProductDetail from '../../pages/ProductDetail/ProductDetail';
-import Payment from '../../pages/Payment/Payment';
+import CheckOut from '../../pages/CheckOut/CheckOut';
 import MyCart from '../../pages/MyCart/MyCart';
+import PlaceOrder from '../../pages/PlaceOrder/PlaceOrder';
 
 export default function Navigation() {
   return (
@@ -31,7 +32,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName='Payment'
+      initialRouteName='AppTabs'
     >
       <Stack.Screen name="AppTabs" component={AppTabs} />
       <Stack.Screen name="Splash" component={Splash} />
@@ -39,7 +40,8 @@ function RootNavigator() {
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="MyCart" component={MyCart} />
-      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="CheckOut" component={CheckOut} />
+      <Stack.Screen name="PlaceOrder" component={PlaceOrder} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="ForgetPass" component={ForgetPass} />
