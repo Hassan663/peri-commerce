@@ -1,152 +1,148 @@
 // @app
-import React, { } from 'react';
+import React, {
+  useState
+} from 'react';
 import {
   Dimensions,
   Image,
-  SafeAreaView, ScrollView, Text, TextInput, View,
+  SafeAreaView,
+  ScrollView,
+  TextInput,
+  View,
 } from 'react-native';
 
-import { styles } from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import { SwipeListView } from 'react-native-swipe-list-view';
+
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
-import { SwipeListView } from 'react-native-swipe-list-view';
 import Button from '../../components/Button';
+import { styles } from './styles';
+import { MYCARTDATA } from './DummyData';
 
 const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
 
 const MyCart = ({ navigation }) => {
+  const [noOfItem, setNoOfItem] = useState(0)
 
-  const data = [
-    { key: '1', text: 'Item 1' },
-    { key: '2', text: 'Item 2' },
-    { key: '3', text: 'Item 3' },
-    // { key: '1', text: 'Item 1' },
-    // { key: '2', text: 'Item 2' },
-    // { key: '3', text: 'Item 3' },
-    // Add more items here
-  ];
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={{}}>
-
-        <View style={{ height: heightFlex1 * 1, backgroundColor: 'blue' }}>
+      <ScrollView showsVerticalScrollIndicator={false}     >
+        <View style={{ height: heightFlex1 * 1, }}>
           <View style={styles.productContainer}>
             <View style={styles.circle(35)}>
               <Image source={require('../../assets/back.png')} />
             </View>
-            <View style={{
-              // height: 20, width: 20,
-              // overflow: "hidden",
-              borderRadius: RFPercentage(3),
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 6,
-              },
-              shadowOpacity: 0.39,
-              shadowRadius: 8.30,
-
-              elevation: 13,
-            }}>
-
-              <View style={[styles.circle(12), { position: "absolute", zIndex: 2, top: -5, right: '3%', }]}>
-                <Title type={`Poppin-9`} color={Colors.white} weight={`700`} title={`5`} />
+            <View style={styles.headerCartContainer}>
+              <View style={[styles.circle(12), styles.headerCartPopup]}>
+                <Title type={`Poppin-9`} color={Colors.white} weight={`700`} title={MYCARTDATA.length} />
               </View>
               <Image source={require('../../assets/cart.png')} />
             </View>
           </View>
         </View>
-        <View style={{
-          // height: heightFlex1 * 6
-          paddingVertical: RFPercentage(1)
-        }}>
-          {/* <ScrollView> */}
-          <View style={{ marginHorizontal: RFPercentage(3), marginVertical: RFPercentage(2) }}>
-
-            <Title type={`Poppin-18`} color={Colors.primary} weight={`600`} title={`My Cart`} />
+        <View >
+          <View style={styles.myCartWrapper}>
+            <Title
+              type={`Poppin-18`}
+              color={Colors.primary}
+              weight={`600`}
+              title={`My Cart`} />
           </View>
           <SwipeListView
-            data={data}
-            // style={{justifyContent: 'space-between'}}
-            contentContainerStyle={{ justifyContent: 'space-evenly', flex: 1 }}
+            data={MYCARTDATA}
+            contentContainerStyle={styles.myCartContentContainer}
             renderItem={(data, rowMap) => (
               <View style={styles.rowFront}>
-                <Text>{data.item.text}</Text>
+                <Image style={styles.cartItemImg} source={data.item.photoURL} />
+
+                <View style={styles.cartItemContentWrapper}>
+                  <View>
+                    <Title
+                      type={`Poppin-14`}
+                      color={Colors.primary}
+                      weight={`600`}
+                      title={data?.item?.name}
+                    />
+                    <Title
+                      type={`Poppin-11`}
+                      color={Colors.fontColor}
+                      weight={`400`}
+                      title={data?.item?.description} />
+                  </View>
+                  <View style={styles.cartItemContentBody}>
+                    <Title type={`Poppin-14`} color={Colors.primary} weight={`700`} title={data?.item?.price} />
+                    <View style={[styles.noOfItemWrapper, styles.mr2]}>
+                      <AntDesign
+                        onPress={() => noOfItem > 0 && setNoOfItem(noOfItem - 1)}
+                        color={Colors.primary}
+                        name={'minus'}
+                        size={RFPercentage(2)} />
+                      <Title
+                        title={noOfItem}
+                        color={Colors.primary}
+                        weight={'400'}
+                        type={`Poppin-14`} />
+                      <AntDesign
+                        onPress={() => noOfItem < 10 && setNoOfItem(noOfItem + 1)}
+                        color={Colors.primary}
+                        name={'plus'}
+                        size={RFPercentage(2)} />
+                    </View>
+                  </View>
+                </View>
               </View>
             )}
             renderHiddenItem={(data, rowMap) => (
               <View style={styles.rowBack}>
                 <View style={{ flex: 1, }} />
-                <View style={{
-                  flex: 1,
-                  height: "100%",
-                  backgroundColor: Colors.primary,
-                  borderRadius: RFPercentage(2),
-                  justifyContent: 'center',
-                  paddingLeft: 15,
-                  paddingRight: 15,
-                  alignItems: 'flex-end',
-
-                }} >
+                <View style={styles.deleteContainer} >
                   <MaterialIcons name={`delete`} size={RFPercentage(3)} color={Colors.white} />
                 </View>
               </View>
             )}
             leftOpenValue={0}
-            rightOpenValue={-75}
+            rightOpenValue={-50}
           />
-          {/* </ScrollView> */}
         </View>
-        <View style={{ height: heightFlex1 * 3 }}>
-          <View style={{
-            height: 50,
-            width: '90%',
-            alignSelf: 'center',
-            paddingHorizontal: RFPercentage(2),
-            flexDirection: 'row',
-            backgroundColor: Colors.inputBg,
-            borderRadius: RFPercentage(2),
-            alignItems: 'center',
-            // justifyContent: 'flex-end',
-            marginVertical: RFPercentage(2)
-          }}>
+        <View style={{}}>
+          <View style={styles.promoContainer}>
             <TextInput
               style={{ flex: 1 }}
               placeholder='Promo Code'
             />
-
             <Button
               title={`Apply`}
-              titleStyle={{ color: Colors.white, fontSize: 11, fontWeight: "600" }}
-              customStyle={{ backgroundColor: Colors.primary, justifyContent: "center", alignItems: 'center', height: 30, width: 60, borderRadius: RFPercentage(1.5) }}
+              titleStyle={styles.applyText}
+              customStyle={styles.applyContainer}
             />
           </View>
           <View style={styles.row}>
-            <Title type={`Poppin-14`} color={Colors.fontColor} weight={`600`} title={`Total (3 item) :`} />
-            <Title type={`Poppin-20`} color={Colors.primary} weight={`600`} title={`$500`} />
+            <Title
+              type={`Poppin-14`}
+              color={Colors.fontColor}
+              weight={`600`}
+              title={`Total (${MYCARTDATA.length} item) :`} />
+            <Title
+              type={`Poppin-20`}
+              color={Colors.primary}
+              weight={`600`}
+              title={`$500`} />
 
           </View>
           <View style={styles.row}>
-            <View style={{
-              height: 50,
-              flexDirection: "row",
-              borderRadius: RFPercentage(1),
-              overflow: 'hidden',
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingHorizontal: RFPercentage(1),
-              width: '100%',
-              // alignSelf: 'center',
-              backgroundColor: Colors.primary
-            }}>
-              <Title type={`Poppin-16`} color={Colors.white} weight={`600`} title={`PROCEED TO CHECHOUT`} />
+            <View style={styles.checkOutContainer}>
+              <Title
+                type={`Poppin-16`}
+                color={Colors.white}
+                weight={`600`}
+                title={`PROCEED TO CHECHOUT`} />
               <Image source={require('../../assets/rightIcon.png')} />
             </View>
           </View>
-
         </View>
 
       </ScrollView>
