@@ -8,6 +8,9 @@ export const styles = StyleSheet.create({
     poppin_20: {
         fontSize: 20,
     },
+    poppin_7: {
+        fontSize: 7,
+    },
     poppin_9: {
         fontSize: 9,
     },
