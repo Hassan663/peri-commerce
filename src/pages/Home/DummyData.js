@@ -99,6 +99,7 @@ export const data = {
                         "1": {
                             "name": "Short Tipo Crossbody Bag",
                             "price": 34.99,
+                            "photoURL": 'https://w7.pngwing.com/pngs/116/378/png-transparent-red-leather-tote-bag-handbag-leather-tote-bag-briefcase-prada-leather-hand-bags-brown-hand-fashion.png',
                             "description": "Compact crossbody bag with multiple compartments."
                         },
                         "2": {

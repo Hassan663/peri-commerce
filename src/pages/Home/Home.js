@@ -26,14 +26,25 @@ const widthFlex1 = windowWidth / 10
 
 const Home = ({ navigation }) => {
   useEffect(() => {
-    console.log(data, 'data')
+    // console.log(data, 'data')
+    // {
+    //   const collectionRef = firestore().collection('New Arrivals');
+    //   Object.entries(data.categories).map(([key, v]) => {
+    //     console.log(key, v, 'key, v')
+    //     const customDocumentRef = collectionRef.doc(key);
+    //     customDocumentRef.set(v);
 
+    //   })
+    // }
     // firestore()
     //   .collection('New Arrivals')
     //   .add(data)
     //   .then(() => {
     //     console.log('User added!');
     //   });
+
+
+
     firestore().collection('New Arrivals').get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
