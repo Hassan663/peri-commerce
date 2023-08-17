@@ -10,12 +10,14 @@ import {
 } from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import auth from '@react-native-firebase/auth';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import { styles } from './styles';
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
 import { RATING } from './DummyData';
+import { addItem, deleteItem, getItem } from '../../store/action/action';
 
 const ProductDetail = ({ navigation, route }) => {
   const [noOfItem, setNoOfItem] = useState(1)
@@ -30,7 +32,10 @@ const ProductDetail = ({ navigation, route }) => {
           <TouchableOpacity activeOpacity={.8} onPress={() => navigation.pop()} style={styles.circle(35)}>
             <Image source={require('../../assets/back.png')} />
           </TouchableOpacity>
-          <Image source={require('../../assets/cart.png')} />
+          <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('MyCart')}  >
+
+            <Image source={require('../../assets/cart.png')} />
+          </TouchableOpacity>
         </View>
         <Image
           style={styles.itemImg}
@@ -156,7 +161,40 @@ const ProductDetail = ({ navigation, route }) => {
               type={`Poppin-18`} />
 
           </View>
-          <View style={styles.cartContainer}>
+          <TouchableOpacity
+            onPress={async () => {
+              if (selectSize && selectColor) {
+
+                const currentUserUid = auth().currentUser?.uid;
+                const myCartObj = {}
+                myCartObj.company = productDetail.key
+                myCartObj.name = productDetail.value.name
+                myCartObj.description = productDetail.value.description
+                myCartObj.photoURL = productDetail.value.photoURL
+                myCartObj.price = productDetail.value.price
+                myCartObj.noOfItem = noOfItem
+                myCartObj.selectColor = selectColor
+                myCartObj.selectSize = selectSize
+                myCartObj.userUid = currentUserUid
+                let myCart = []
+                myCart.push(myCartObj)
+                // deleteItem('myCart');
+                const username = await getItem('myCart');
+                // console.log(JSON.parse(username), 'JSON.parse(username)')
+                if (JSON.parse(username)?.length > 0) {
+                  // deleteItem('myCart');
+                  await addItem('myCart', JSON.stringify([...JSON.parse(username), ...myCart]))
+                  // console.log([...JSON.parse(username), ...myCart], 'mergeArray')
+                  navigation.navigate('MyCart')
+                } else await addItem('myCart', JSON.stringify(myCart))
+              } else {
+                console.log('please select size or color', 'item',)
+
+              }
+              // myCartObj.company =
+
+            }}
+            style={styles.cartContainer}>
 
             <Image style={{ marginHorizontal: RFPercentage(1) }} source={require('../../assets/cartIcon.png')} />
 
@@ -165,7 +203,7 @@ const ProductDetail = ({ navigation, route }) => {
               color={Colors.white}
               weight={'600'}
               type={`Poppin-16`} />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
 

@@ -1,5 +1,6 @@
 // @app
 import React, {
+  useEffect,
   useState
 } from 'react';
 import {
@@ -8,6 +9,7 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -21,24 +23,38 @@ import Colors from '../../styles/Colors';
 import Button from '../../components/Button';
 import { styles } from './styles';
 import { MYCARTDATA } from './DummyData';
+import { getItem } from '../../store/action/action';
 
 const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
 
 const MyCart = ({ navigation }) => {
   const [noOfItem, setNoOfItem] = useState(0)
+  const [myCarts, setmyCarts] = useState(0)
+  useEffect(() => {
+    getData()
+  }, [])
+  const getData = async () => {
 
+    const myCart = await getItem('myCart');
+    if (JSON.parse(myCart)?.length > 0) {
+      console.log(JSON.parse(myCart), 'myCart',)
+      setmyCarts(JSON.parse(myCart))
+    } else {
+    }
+
+  }
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}     >
         <View style={{ height: heightFlex1 * 1, }}>
           <View style={styles.productContainer}>
-            <View style={styles.circle(35)}>
+            <TouchableOpacity onPress={() => navigation.pop()} activeOpacity={.8} style={styles.circle(35)}>
               <Image source={require('../../assets/back.png')} />
-            </View>
+            </TouchableOpacity>
             <View style={styles.headerCartContainer}>
               <View style={[styles.circle(12), styles.headerCartPopup]}>
-                <Title type={`Poppin-9`} color={Colors.white} weight={`700`} title={MYCARTDATA.length} />
+                <Title type={`Poppin-9`} color={Colors.white} weight={`700`} title={myCarts?.length} />
               </View>
               <Image source={require('../../assets/cart.png')} />
             </View>
@@ -53,11 +69,11 @@ const MyCart = ({ navigation }) => {
               title={`My Cart`} />
           </View>
           <SwipeListView
-            data={MYCARTDATA}
+            data={myCarts}
             contentContainerStyle={styles.myCartContentContainer}
             renderItem={(data, rowMap) => (
               <View style={styles.rowFront}>
-                <Image style={styles.cartItemImg} source={data.item.photoURL} />
+                <Image style={styles.cartItemImg} source={{ uri: data.item.photoURL }} />
 
                 <View style={styles.cartItemContentWrapper}>
                   <View>
@@ -71,7 +87,7 @@ const MyCart = ({ navigation }) => {
                       type={`Poppin-11`}
                       color={Colors.fontColor}
                       weight={`400`}
-                      title={data?.item?.description} />
+                      title={data?.item?.company} />
                   </View>
                   <View style={styles.cartItemContentBody}>
                     <Title type={`Poppin-14`} color={Colors.primary} weight={`700`} title={data?.item?.price} />
@@ -99,9 +115,11 @@ const MyCart = ({ navigation }) => {
             renderHiddenItem={(data, rowMap) => (
               <View style={styles.rowBack}>
                 <View style={{ flex: 1, }} />
-                <View style={styles.deleteContainer} >
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => { }} style={styles.deleteContainer} >
                   <MaterialIcons name={`delete`} size={RFPercentage(3)} color={Colors.white} />
-                </View>
+                </TouchableOpacity>
               </View>
             )}
             leftOpenValue={0}
@@ -125,7 +143,7 @@ const MyCart = ({ navigation }) => {
               type={`Poppin-14`}
               color={Colors.fontColor}
               weight={`600`}
-              title={`Total (${MYCARTDATA.length} item) :`} />
+              title={`Total (${myCarts?.length} item) :`} />
             <Title
               type={`Poppin-20`}
               color={Colors.primary}
