@@ -12,7 +12,6 @@ import {
 
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { RFPercentage } from 'react-native-responsive-fontsize';
-import firestore from '@react-native-firebase/firestore';
 
 import Colors from '../../styles/Colors';
 import Title from '../../components/Title';
@@ -20,13 +19,16 @@ import { styles } from './styles';
 import { ArrivalCart } from './Components/ArrivalCart';
 import { Banner } from './Components/Banner';
 import { data } from './DummyData';
+import { getNewArrivals } from '../../store/action/action';
+import { useDispatch, useSelector } from 'react-redux';
 
 const windowWidth = Dimensions.get('window').width;
 const widthFlex1 = windowWidth / 10
 
 const Home = ({ navigation }) => {
+  const dispatch = useDispatch()
   useEffect(() => {
-    // console.log(data, 'data')
+    // ADD JSON TO FIREBASE FIRESTORE
     // {
     //   const collectionRef = firestore().collection('New Arrivals');
     //   Object.entries(data.categories).map(([key, v]) => {
@@ -35,26 +37,12 @@ const Home = ({ navigation }) => {
     //     customDocumentRef.set(v);
 
     //   })
-    // }
-    // firestore()
-    //   .collection('New Arrivals')
-    //   .add(data)
-    //   .then(() => {
-    //     console.log('User added!');
-    //   });
-
-
-
-    firestore().collection('New Arrivals').get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
-        });
-      })
-      .catch((error) => {
-        console.error("Error getting documents: ", error);
-      });
+    // } 
+    // ADD JSON TO FIREBASE FIRESTORE
+    dispatch(getNewArrivals())
   }, [])
+  const newArrivals = useSelector((state) => state.root.newArrivals);
+  console.log(newArrivals, 'newArrivals')
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -115,14 +103,17 @@ const Home = ({ navigation }) => {
             color={Colors.fontColor}
             type={'Poppin-11'} />
         </View>
-        <FlatList
-          data={[0, 0, 0, 0, 0, 0,]}
-          numColumns={2}
-          contentContainerStyle={{ marginBottom: RFPercentage(10) }}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
-          renderItem={() => <ArrivalCart navigation={navigation} />}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        {newArrivals?.length > 0
+          &&
+          <FlatList
+            data={newArrivals}
+            numColumns={2}
+            contentContainerStyle={{ marginBottom: RFPercentage(10) }}
+            columnWrapperStyle={{ justifyContent: "space-between" }}
+            renderItem={({ item }) => <ArrivalCart item={item} navigation={navigation} />}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        }
 
       </ScrollView>
     </SafeAreaView >

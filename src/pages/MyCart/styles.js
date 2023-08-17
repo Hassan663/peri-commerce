@@ -103,7 +103,9 @@ export const styles = StyleSheet.create({
         marginHorizontal: RFPercentage(1),
     },
     cartItemContentBody: {
-        flexDirection: 'row', justifyContent: "space-between", alignItems: "center"
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        alignItems: "center"
     },
     cartItemContentWrapper: {
         flex: 1,
@@ -142,7 +144,9 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         justifyContent: "center",
         alignItems: 'center',
-        height: 30, width: 60, borderRadius: RFPercentage(1.5)
+        height: 30,
+        width: 60,
+        borderRadius: RFPercentage(1.5)
     },
     checkOutContainer: {
         height: 50,

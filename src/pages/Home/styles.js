@@ -95,17 +95,27 @@ export const styles = StyleSheet.create({
         height: 200,
         borderRadius: RFPercentage(3),
         marginBottom: 10,
-        width: '100%'
+        backgroundColor: "white",
+        width: '98%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.09,
+        shadowRadius: 4.65,
+
+        elevation: 7,
     },
     cartHeart: {
         position: "absolute",
         right: '8%',
         top: "5%"
     },
-    inputWrapper:{
+    inputWrapper: {
         height: 50,
         width: "100%",
         marginVertical: RFPercentage(2),
         flexDirection: "row",
-      }
+    }
 });

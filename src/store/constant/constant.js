@@ -1,5 +1,5 @@
-const ActionTypes = { 
-    DUMMYDATA:"DUMMYDATA"
+const ActionTypes = {
+    NEWARRIVALS: "NEWARRIVALS"
 }
 
 export default ActionTypes;

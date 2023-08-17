@@ -1,5 +1,6 @@
 // @app
 import React, {
+  useEffect,
   useState
 } from 'react';
 import {
@@ -18,14 +19,26 @@ import Title from '../../components/Title';
 import { styles } from './styles';
 import { ArrivalCart } from '../Home/Components/ArrivalCart';
 import {
-  COMPANY,
+  // COMPANY,
   MODAL
 } from './DummyData';
 
-const Category = ({ navigation }) => {
+const Category = ({ navigation, route }) => {
 
   const [selectedCompany, setSeletedCompany] = useState('')
   const [selectedModal, setSeletedModal] = useState('')
+
+  const selectedProduct = route?.params?.item
+  // Object.keys(selectedProduct.data.subcategories).forEach(function (key, index) {
+  //   // selectedProduct.data.subcategories[key] *= 2;
+  //   console.log(selectedProduct.data.subcategories[key],key, 'selectedProduct')
+
+  // });
+  // useEffect(() => {
+  // }, [])
+  const COMPANY = Object.entries(selectedProduct.data.subcategories).map(([key, value]) => ({ key, value }));
+  const COMPANYPRODUCTS = selectedCompany && Object.entries(selectedProduct?.data?.subcategories[selectedCompany]?.items).map(([key, value]) => ({ key:selectedCompany, value }));
+  console.log(selectedProduct,  'selectedProduct', selectedCompany)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -73,11 +86,11 @@ const Category = ({ navigation }) => {
           data={COMPANY}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity onPress={() => setSeletedCompany(item)} style={[styles.companyWrapper, { paddingHorizontal: 0 }]}>
+              <TouchableOpacity onPress={() => setSeletedCompany(item?.key)} style={[styles.companyWrapper, { paddingHorizontal: 0 }]}>
                 <Title
-                  title={item}
-                  weight={selectedCompany == item ? "600" : '400'}
-                  color={selectedCompany == item ? Colors.black : Colors.gray}
+                  title={item?.key}
+                  weight={selectedCompany == item?.key ? "600" : '400'}
+                  color={selectedCompany == item?.key ? Colors.black : Colors.gray}
                   type={'Poppin-14'} />
               </TouchableOpacity>
             )
@@ -86,7 +99,7 @@ const Category = ({ navigation }) => {
         />
       </View>
 
-      <View>
+      {/* <View>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -105,14 +118,17 @@ const Category = ({ navigation }) => {
           }}
           keyExtractor={(item, index) => index.toString()}
         />
-      </View>
+      </View> */}
 
       <FlatList
-        data={[0, 0, 0, 0, 0, 0,]}
+        data={COMPANYPRODUCTS}
         numColumns={2}
         contentContainerStyle={styles.listContainer2}
         columnWrapperStyle={{ justifyContent: "space-between" }}
-        renderItem={() => <ArrivalCart navigation={navigation} />}
+        renderItem={(item) => {
+          // console.log(item.item.value, 'item')
+          return (<ArrivalCart item={item.item} category navigation={navigation} />)
+        }}
         keyExtractor={(item, index) => index.toString()}
       />
 

@@ -10,33 +10,50 @@ import Title from '../../../components/Title';
 import Colors from '../../../styles/Colors';
 import { styles } from '../styles';
 
-export const ArrivalCart = ({ navigation }) => {
-
+export const ArrivalCart = ({ item, navigation, category }) => {
+    if (category) {
+        var photoURL = item?.value?.photoURL
+        var name = item?.value?.name
+        var price = item?.value?.price
+        var keys = item.key
+        console.log(item, 'categorycategoryitem')
+    } else
+        if (item?.data?.subcategories) {
+            var keys = Object.keys(item?.data?.subcategories);
+            if (keys.length > 0) {
+                const firstKey = keys[0];
+                const firstValue = item?.data?.subcategories[firstKey];
+                var photoURL = firstValue?.items[1]?.photoURL
+                var name = firstValue?.items[1]?.name
+                var price = firstValue?.items[1]?.price
+            }
+        }
     return (
         <TouchableOpacity
             activeOpacity={.8}
-            onPress={() => {
-                if (navigation) { navigation.navigate('Category') }
-            }}
+            onPress={() => { if (navigation) { navigation.navigate('Category', { item }) } }}
             style={styles.cartContainer}>
-            <Image source={require('../../../assets/arrivalItem.png')} style={styles.cartImg} resizeMode='cover' />
+            {/* <Image source={require('../../../assets/arrivalItem.png')} style={styles.cartImg} resizeMode='cover' /> */}
+            <View style={styles.cartImg}>
+                <Image source={{ uri: photoURL }} style={styles.cartImg} resizeMode='contain' />
+            </View>
             <Image
                 source={require('../../../assets/arrivalItemHeart.png')}
                 resizeMode='contain'
                 style={styles.cartHeart}
             />
             <Title
-                title={`The Marc Jacobs`}
+                title={name}
                 weight={'600'}
                 color={Colors.primary}
                 type={'Poppin-14'} />
             <Title
-                title={`Traveler Tote`}
+                title={category ? keys : keys && keys[0]}
                 weight={'400'}
                 color={Colors.fontColor}
                 type={'Poppin-11'} />
             <Title
-                title={`$195.00`}
+                title={`$${price}`}
                 weight={'600'}
                 color={Colors.primary}
                 type={'Poppin-14'} />
