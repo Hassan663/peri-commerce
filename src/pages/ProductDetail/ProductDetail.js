@@ -15,37 +15,38 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import { styles } from './styles';
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
-import { PRODUCTCOLOR, PRODUCTSIZE, RATING } from './DummyData';
+import { RATING } from './DummyData';
 
-const ProductDetail = ({ navigation }) => {
-  const [noOfItem, setNoOfItem] = useState(0)
+const ProductDetail = ({ navigation, route }) => {
+  const [noOfItem, setNoOfItem] = useState(1)
   const [selectSize, setSelectSize] = useState("")
   const [selectColor, setSelectColor] = useState("")
+  const productDetail = route?.params?.item
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.itemImgContainer}>
         <View style={styles.productContainer}>
-          <View style={styles.circle(35)}>
+          <TouchableOpacity activeOpacity={.8} onPress={() => navigation.pop()} style={styles.circle(35)}>
             <Image source={require('../../assets/back.png')} />
-          </View>
+          </TouchableOpacity>
           <Image source={require('../../assets/cart.png')} />
         </View>
         <Image
           style={styles.itemImg}
           resizeMode='contain'
-          source={require('../../assets/mobile.png')} />
+          source={{ uri: productDetail?.value?.photoURL }} />
       </View>
       <View style={styles.itemSheet}>
-        <View style={styles.sheetHeader}>
-          <View style={styles.itemNameContainer}>
+        <View style={[styles.sheetHeader,]}>
+          <View style={[styles.itemNameContainer,]}>
             <Title
-              title={`Roller Rabbit`}
+              title={productDetail?.value?.name}
               color={Colors.primary}
               weight={'600'}
               type={`Poppin-18`} />
             <Title
-              title={`Vado Odelle Dress`}
+              title={productDetail.key}
               color={Colors.fontColor}
               weight={'400'}
               type={`Poppin-11`} />
@@ -69,7 +70,7 @@ const ProductDetail = ({ navigation }) => {
           </View>
 
         </View>
-        <View style={styles.row}>
+        <View style={[styles.row,]}>
           <View style={styles.reviewContainer}>
 
             {RATING.map(() => (
@@ -98,7 +99,7 @@ const ProductDetail = ({ navigation }) => {
             <Title title={`Size`} color={Colors.primary} weight={'600'} type={`Poppin-16`} />
 
             <View style={styles.sizeContainer}>
-              {PRODUCTSIZE.map((item, index) => (
+              {productDetail?.value?.size?.map((item, index) => (
                 <TouchableOpacity
                   key={index.toString()}
                   activeOpacity={.8}
@@ -110,7 +111,7 @@ const ProductDetail = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.selectColorContainer}>
-            {PRODUCTCOLOR.map((item, index) => (
+            {productDetail?.value?.colors?.map((item, index) => (
               <TouchableOpacity
                 activeOpacity={.8}
                 onPress={() => setSelectColor(item)}
@@ -135,13 +136,13 @@ const ProductDetail = ({ navigation }) => {
           type={`Poppin-16`} />
 
         <Title
-          title={`Get a little lift from these Sam Edelman sandals featuring ruched straps and leather lace-up ties, while a braided jute sole makes a fresh statement for summer.`}
+          title={productDetail?.value?.description}
           color={Colors.fontColor}
           weight={'400'}
           type={`Poppin-11`} />
 
         <View style={styles.sheetFooter}>
-          <View style={{ flex: 1.5 }}>
+          <View style={{ flex: 1.5, }}>
 
             <Title
               title={`Total Price`}
@@ -149,7 +150,7 @@ const ProductDetail = ({ navigation }) => {
               weight={'400'}
               type={`Poppin-9`} />
             <Title
-              title={`$198.00`}
+              title={`$${(productDetail?.value?.price * noOfItem).toFixed(2)}`}
               color={Colors.primary}
               weight={'700'}
               type={`Poppin-18`} />

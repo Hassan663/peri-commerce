@@ -16,22 +16,29 @@ export const ArrivalCart = ({ item, navigation, category }) => {
         var name = item?.value?.name
         var price = item?.value?.price
         var keys = item.key
-        console.log(item, 'categorycategoryitem')
-    } else
-        if (item?.data?.subcategories) {
-            var keys = Object.keys(item?.data?.subcategories);
-            if (keys.length > 0) {
-                const firstKey = keys[0];
-                const firstValue = item?.data?.subcategories[firstKey];
-                var photoURL = firstValue?.items[1]?.photoURL
-                var name = firstValue?.items[1]?.name
-                var price = firstValue?.items[1]?.price
-            }
+    } else if (item?.data?.subcategories) {
+        var keys = Object.keys(item?.data?.subcategories);
+        if (keys.length > 0) {
+            const firstKey = keys[0];
+            const firstValue = item?.data?.subcategories[firstKey];
+            var photoURL = firstValue?.items[1]?.photoURL
+            var name = firstValue?.items[1]?.name
+            var price = firstValue?.items[1]?.price
         }
+    }
     return (
         <TouchableOpacity
             activeOpacity={.8}
-            onPress={() => { if (navigation) { navigation.navigate('Category', { item }) } }}
+            onPress={() => {
+                if (navigation) {
+                    if (category) {
+                        navigation.navigate('ProductDetail', { item })
+                    }
+                    else {
+                        navigation.navigate('Category', { item })
+                    }
+                }
+            }}
             style={styles.cartContainer}>
             {/* <Image source={require('../../../assets/arrivalItem.png')} style={styles.cartImg} resizeMode='cover' /> */}
             <View style={styles.cartImg}>

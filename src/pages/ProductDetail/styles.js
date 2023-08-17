@@ -53,6 +53,7 @@ export const styles = StyleSheet.create({
     },
     sheetHeader: {
         height: RFPercentage(6),
+        // paddingVertical:1,
         justifyContent: "space-between",
         flexDirection: 'row'
     },
@@ -62,7 +63,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     noOfItemContainer: {
-        flex: 1,
+        flex: .3,
         justifyContent: 'flex-end',
         alignItems: 'flex-end'
     },
@@ -112,8 +113,12 @@ export const styles = StyleSheet.create({
     },
     sheetFooter: {
         flexDirection: 'row',
-        marginVertical: RFPercentage(4),
+        position: "absolute",
+        bottom: RFPercentage(3),
+        zIndex: 2,
         height: 50,
+        width: "100%",
+        alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'space-between'
     },

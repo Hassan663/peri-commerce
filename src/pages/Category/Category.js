@@ -18,10 +18,6 @@ import Colors from '../../styles/Colors';
 import Title from '../../components/Title';
 import { styles } from './styles';
 import { ArrivalCart } from '../Home/Components/ArrivalCart';
-import {
-  // COMPANY,
-  MODAL
-} from './DummyData';
 
 const Category = ({ navigation, route }) => {
 
@@ -29,16 +25,15 @@ const Category = ({ navigation, route }) => {
   const [selectedModal, setSeletedModal] = useState('')
 
   const selectedProduct = route?.params?.item
-  // Object.keys(selectedProduct.data.subcategories).forEach(function (key, index) {
-  //   // selectedProduct.data.subcategories[key] *= 2;
-  //   console.log(selectedProduct.data.subcategories[key],key, 'selectedProduct')
 
-  // });
-  // useEffect(() => {
-  // }, [])
-  const COMPANY = Object.entries(selectedProduct.data.subcategories).map(([key, value]) => ({ key, value }));
-  const COMPANYPRODUCTS = selectedCompany && Object.entries(selectedProduct?.data?.subcategories[selectedCompany]?.items).map(([key, value]) => ({ key:selectedCompany, value }));
-  console.log(selectedProduct,  'selectedProduct', selectedCompany)
+  if (selectedProduct?.data?.subcategories) {
+    var COMPANY = Object.entries(selectedProduct?.data?.subcategories).map(([key, value]) => ({ key, value }));
+    var COMPANYPRODUCTS = selectedCompany && Object.entries(selectedProduct?.data?.subcategories[selectedCompany]?.items).map(([key, value]) => ({ key: selectedCompany, value }));
+  }
+  useEffect(() => {
+    var keys = Object.keys(selectedProduct?.data?.subcategories);
+    if (keys?.length > 0) setSeletedCompany(keys[0])
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,7 +47,7 @@ const Category = ({ navigation, route }) => {
             size={RFPercentage(2)}
             style={styles.mr1}
             color={Colors.primary} />
-          <Title title={'Phones'} type={'Poppin-16'} weight={'600'} color={Colors.primary} />
+          <Title title={selectedProduct?.id} type={'Poppin-16'} weight={'600'} color={Colors.primary} />
         </TouchableOpacity>
 
         <View style={styles.rowContainer}>
@@ -71,7 +66,7 @@ const Category = ({ navigation, route }) => {
 
       <View style={styles.row}>
         <Title
-          title={`50 results in iPhone 13/13pro/max`}
+          title={`${COMPANYPRODUCTS?.length} results in ${selectedCompany}`}
           weight={'600'}
           color={Colors.gray}
           type={'Poppin-14'} />
@@ -126,7 +121,6 @@ const Category = ({ navigation, route }) => {
         contentContainerStyle={styles.listContainer2}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         renderItem={(item) => {
-          // console.log(item.item.value, 'item')
           return (<ArrivalCart item={item.item} category navigation={navigation} />)
         }}
         keyExtractor={(item, index) => index.toString()}
