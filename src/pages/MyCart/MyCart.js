@@ -24,13 +24,12 @@ import Button from '../../components/Button';
 import { styles } from './styles';
 import { MYCARTDATA } from './DummyData';
 import { addItem, deleteItem, getItem } from '../../store/action/action';
-import { renderHiddenItem } from './Components/RenderHiddenItem';
+import { RenderItem, renderHiddenItem,   } from './Components/RenderHiddenItem';
 
 const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
 
 const MyCart = ({ navigation }) => {
-  const [noOfItem, setNoOfItem] = useState(0)
   const [myCarts, setmyCarts] = useState(0)
   useEffect(() => {
     getData()
@@ -43,7 +42,7 @@ const MyCart = ({ navigation }) => {
       setmyCarts(JSON.parse(myCart))
     } else {
     }
-  } 
+  }
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: RFPercentage(12) }} showsVerticalScrollIndicator={false}     >
@@ -71,48 +70,8 @@ const MyCart = ({ navigation }) => {
           <SwipeListView
             data={myCarts}
             contentContainerStyle={styles.myCartContentContainer}
-            renderItem={(data, rowMap) => (
-              <View style={styles.rowFront}>
-                <Image style={styles.cartItemImg} source={{ uri: data.item.photoURL }} />
-
-                <View style={styles.cartItemContentWrapper}>
-                  <View>
-                    <Title
-                      type={`Poppin-14`}
-                      color={Colors.primary}
-                      weight={`600`}
-                      title={data?.item?.name}
-                    />
-                    <Title
-                      type={`Poppin-11`}
-                      color={Colors.fontColor}
-                      weight={`400`}
-                      title={data?.item?.company} />
-                  </View>
-                  <View style={styles.cartItemContentBody}>
-                    <Title type={`Poppin-14`} color={Colors.primary} weight={`700`} title={data?.item?.price} />
-                    <View style={[styles.noOfItemWrapper, styles.mr2]}>
-                      <AntDesign
-                        onPress={() => noOfItem > 0 && setNoOfItem(noOfItem - 1)}
-                        color={Colors.primary}
-                        name={'minus'}
-                        size={RFPercentage(2)} />
-                      <Title
-                        title={noOfItem}
-                        color={Colors.primary}
-                        weight={'400'}
-                        type={`Poppin-14`} />
-                      <AntDesign
-                        onPress={() => noOfItem < 10 && setNoOfItem(noOfItem + 1)}
-                        color={Colors.primary}
-                        name={'plus'}
-                        size={RFPercentage(2)} />
-                    </View>
-                  </View>
-                </View>
-              </View>
-            )}
-            renderHiddenItem={renderHiddenItem}
+            renderItem={(data, rowMap) => <RenderItem data={data} rowMap={rowMap} />}
+            renderHiddenItem={(data, rowMap) => renderHiddenItem(data, rowMap, setmyCarts)}
             leftOpenValue={0}
             rightOpenValue={-50}
           />

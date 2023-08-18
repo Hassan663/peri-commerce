@@ -180,13 +180,9 @@ const ProductDetail = ({ navigation, route }) => {
 
                 let myCart = []
                 myCart.push(myCartObj)
-                // deleteItem('myCart');
                 const username = await getItem('myCart');
-                // console.log(JSON.parse(username), 'JSON.parse(username)')
                 if (JSON.parse(username)?.length > 0) {
-                  // deleteItem('myCart');
                   await addItem('myCart', JSON.stringify([...JSON.parse(username), ...myCart]))
-                  // console.log([...JSON.parse(username), ...myCart], 'mergeArray')
                   navigation.navigate('MyCart')
                 } else {
                   await addItem('myCart', JSON.stringify(myCart))
