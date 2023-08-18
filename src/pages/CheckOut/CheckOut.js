@@ -3,7 +3,10 @@ import React, {
 } from 'react';
 import {
   Dimensions,
-  SafeAreaView, ScrollView, TouchableOpacity, View,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 import firestore from '@react-native-firebase/firestore';
@@ -127,26 +130,19 @@ const CheckOut = ({ navigation, route }) => {
           <View style={styles.footerBtn}>
             <Button
               callBack={async () => {
-                // console.log(JSON.parse(myCart), 'myCart')
-                // console.log(newArray, 'newArraynewArraynewArray')
                 const collectionRef = firestore().collection('order');
-                // const customDocumentRef = collectionRef.doc(key);
                 const currentUserUid = auth().currentUser?.uid;
                 let orderObj = { addressLine1, addressLine2, zipCode, recievenumber, email, contactNo, currentUserUid }
                 let obj = { 'orderBy': orderObj, 'Products': route.params }
-                console.log('route.params', obj)
                 collectionRef.add(obj)
                   .then(async () => {
-                    // const userUidToRemove = 'dXArIZ19UHZKAPMkPGu3jFhd7Re2';
                     const myCart = await getItem('myCart');
                     const newArray = JSON.parse(myCart).filter(item => item.userUid !== currentUserUid);
                     console.log('User added!', newArray);
                     alert('Your order has been placed!')
                     if (newArray.length == 0) {
                       deleteItem('myCart');
-
                     } else {
-// 
                       await addItem('myCart', JSON.stringify(newArray))
                     }
                     navigation.navigate('Home')

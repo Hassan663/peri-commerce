@@ -1,8 +1,8 @@
 import ActionTypes from '../constant/constant';
 
 const INITIAL_STATE = {
-     newArrivals: {}, 
-     
+    newArrivals: {},
+    myOrders: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -11,8 +11,13 @@ export default (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 newArrivals: action.payload
-            }) 
-        
+            })
+        case ActionTypes.MYORDERS :
+            return ({
+                ...state,
+                myOrders: action.payload
+            })
+
         default:
             return state;
     }

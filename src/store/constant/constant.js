@@ -1,5 +1,6 @@
 const ActionTypes = {
-    NEWARRIVALS: "NEWARRIVALS"
+    NEWARRIVALS: "NEWARRIVALS",
+    MYORDERS: "MYORDERS"
 }
 
 export default ActionTypes;
