@@ -24,7 +24,7 @@ import Button from '../../components/Button';
 import { styles } from './styles';
 import { MYCARTDATA } from './DummyData';
 import { addItem, deleteItem, getItem } from '../../store/action/action';
-import { RenderItem, renderHiddenItem,   } from './Components/RenderHiddenItem';
+import { RenderItem, renderHiddenItem, } from './Components/RenderHiddenItem';
 
 const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
@@ -102,14 +102,16 @@ const MyCart = ({ navigation }) => {
 
           </View>
           <View style={styles.row}>
-            <View style={styles.checkOutContainer}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('CheckOut', myCarts)}
+              style={styles.checkOutContainer}>
               <Title
                 type={`Poppin-16`}
                 color={Colors.white}
                 weight={`600`}
                 title={`PROCEED TO CHECHOUT`} />
               <Image source={require('../../assets/rightIcon.png')} />
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
 

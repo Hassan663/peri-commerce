@@ -3,9 +3,11 @@ import React, {
 } from 'react';
 import {
   Dimensions,
-  SafeAreaView, ScrollView, View,
+  SafeAreaView, ScrollView, TouchableOpacity, View,
 } from 'react-native';
 
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
@@ -14,18 +16,18 @@ import Colors from '../../styles/Colors';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
 import OutlinedTextInput from '../Signup/Components/OutlinedTextInput';
+import { addItem, getItem } from '../../store/action/action';
 
 const windowHeight = Dimensions.get('window').height;
 
-const CheckOut = ({ navigation }) => {
+const CheckOut = ({ navigation, route }) => {
 
-  const [addressLine1, setAddressLine1] = useState('')
-  const [addressLine2, setAddressLine2] = useState('')
-  const [zipCode, setzipCode] = useState('')
-  const [recievenumber, setrecievenumber] = useState('')
-  const [email, setemail] = useState('')
-  const [contactNo, setcontactNo] = useState('')
-
+  const [addressLine1, setAddressLine1] = useState('nagan chorangi abcd')
+  const [addressLine2, setAddressLine2] = useState('saleem center acbd')
+  const [zipCode, setzipCode] = useState('2044')
+  const [recievenumber, setrecievenumber] = useState('03178941276')
+  const [email, setemail] = useState('mynameismuzammilhussainshah@gmail.com')
+  const [contactNo, setcontactNo] = useState('03123456789')
   return (
     <SafeAreaView
       style={styles.container}
@@ -33,7 +35,10 @@ const CheckOut = ({ navigation }) => {
       <ScrollView contentContainerStyle={{ height: windowHeight, }}>
         <View style={styles.headerContainer}>
 
-          <View style={styles.rowContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.pop()}
+            activeOpacity={.8}
+            style={styles.rowContainer}>
             <AntDesign
               name={`left`}
               size={RFPercentage(2)}
@@ -44,7 +49,7 @@ const CheckOut = ({ navigation }) => {
               type={'Poppin-16'}
               weight={'600'}
               color={Colors.primary} />
-          </View>
+          </TouchableOpacity>
 
           <View style={styles.rowContainer}>
             <AntDesign
@@ -120,7 +125,27 @@ const CheckOut = ({ navigation }) => {
 
         <View style={styles.nextBtnContainer}>
           <View style={styles.footerBtn}>
-            <Button title={'Next'} primary />
+            <Button
+              callBack={async () => {
+                // console.log(JSON.parse(myCart), 'myCart')
+                // console.log(newArray, 'newArraynewArraynewArray')
+                const collectionRef = firestore().collection('order');
+                // const customDocumentRef = collectionRef.doc(key);
+                const currentUserUid = auth().currentUser?.uid;
+                let orderObj = { addressLine1, addressLine2, zipCode, recievenumber, email, contactNo, currentUserUid }
+                let obj = { 'orderBy': orderObj, 'Products': route.params }
+                console.log('route.params', obj)
+                collectionRef.add(obj)
+                  .then(async () => {
+                    // const userUidToRemove = 'dXArIZ19UHZKAPMkPGu3jFhd7Re2';
+                    const myCart = await getItem('myCart');
+                    const newArray = JSON.parse(myCart).filter(item => item.userUid !== currentUserUid);
+                    console.log('User added!', newArray);
+                    await addItem('myCart', JSON.stringify(newArray))
+                    // navigation.navigate('Home')
+                  });
+              }}
+              title={'Next'} primary />
           </View>
         </View>
 
