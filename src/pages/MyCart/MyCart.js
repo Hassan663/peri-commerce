@@ -23,7 +23,8 @@ import Colors from '../../styles/Colors';
 import Button from '../../components/Button';
 import { styles } from './styles';
 import { MYCARTDATA } from './DummyData';
-import { getItem } from '../../store/action/action';
+import { addItem, deleteItem, getItem } from '../../store/action/action';
+import { renderHiddenItem } from './Components/RenderHiddenItem';
 
 const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
@@ -42,11 +43,10 @@ const MyCart = ({ navigation }) => {
       setmyCarts(JSON.parse(myCart))
     } else {
     }
-
-  }
+  } 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}     >
+      <ScrollView contentContainerStyle={{ paddingBottom: RFPercentage(12) }} showsVerticalScrollIndicator={false}     >
         <View style={{ height: heightFlex1 * 1, }}>
           <View style={styles.productContainer}>
             <TouchableOpacity onPress={() => navigation.pop()} activeOpacity={.8} style={styles.circle(35)}>
@@ -112,16 +112,7 @@ const MyCart = ({ navigation }) => {
                 </View>
               </View>
             )}
-            renderHiddenItem={(data, rowMap) => (
-              <View style={styles.rowBack}>
-                <View style={{ flex: 1, }} />
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => { }} style={styles.deleteContainer} >
-                  <MaterialIcons name={`delete`} size={RFPercentage(3)} color={Colors.white} />
-                </TouchableOpacity>
-              </View>
-            )}
+            renderHiddenItem={renderHiddenItem}
             leftOpenValue={0}
             rightOpenValue={-50}
           />

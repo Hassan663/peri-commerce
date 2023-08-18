@@ -6,6 +6,7 @@ import Notification from '../../pages/Notification/Notification';
 import Cart from '../../pages/Cart/Cart';
 import Profile from '../../pages/Profile/Profile';
 import { CustomTabBar } from './CustomTabBarStyles';
+import MyCart from '../../pages/MyCart/MyCart';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ function AppTabs() {
             screenOptions={({ route }) => ({ headerShown: false, })}
             tabBar={props => <CustomTabBar {...props} />} >
             <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Cart" component={Cart} />
+            <Tab.Screen name="MyCart" component={MyCart} />
             <Tab.Screen name="Notification" component={Notification} />
             <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>

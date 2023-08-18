@@ -176,6 +176,8 @@ const ProductDetail = ({ navigation, route }) => {
                 myCartObj.selectColor = selectColor
                 myCartObj.selectSize = selectSize
                 myCartObj.userUid = currentUserUid
+                myCartObj.id = Math.random().toString(36).substring(2, 10);
+
                 let myCart = []
                 myCart.push(myCartObj)
                 // deleteItem('myCart');
@@ -186,9 +188,12 @@ const ProductDetail = ({ navigation, route }) => {
                   await addItem('myCart', JSON.stringify([...JSON.parse(username), ...myCart]))
                   // console.log([...JSON.parse(username), ...myCart], 'mergeArray')
                   navigation.navigate('MyCart')
-                } else await addItem('myCart', JSON.stringify(myCart))
+                } else {
+                  await addItem('myCart', JSON.stringify(myCart))
+                  navigation.navigate('MyCart')
+                }
               } else {
-                console.log('please select size or color', 'item',)
+                alert('please select size or color', 'item',)
 
               }
               // myCartObj.company =
