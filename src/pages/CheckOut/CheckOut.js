@@ -16,7 +16,7 @@ import Colors from '../../styles/Colors';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
 import OutlinedTextInput from '../Signup/Components/OutlinedTextInput';
-import { addItem, getItem } from '../../store/action/action';
+import { addItem, deleteItem, getItem } from '../../store/action/action';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -141,8 +141,15 @@ const CheckOut = ({ navigation, route }) => {
                     const myCart = await getItem('myCart');
                     const newArray = JSON.parse(myCart).filter(item => item.userUid !== currentUserUid);
                     console.log('User added!', newArray);
-                    await addItem('myCart', JSON.stringify(newArray))
-                    // navigation.navigate('Home')
+                    alert('Your order has been placed!')
+                    if (newArray.length == 0) {
+                      deleteItem('myCart');
+
+                    } else {
+// 
+                      await addItem('myCart', JSON.stringify(newArray))
+                    }
+                    navigation.navigate('Home')
                   });
               }}
               title={'Next'} primary />

@@ -4,6 +4,7 @@ import React, {
   useState
 } from 'react';
 import {
+  DeviceEventEmitter,
   Dimensions,
   Image,
   SafeAreaView,
@@ -25,15 +26,25 @@ import { styles } from './styles';
 import { MYCARTDATA } from './DummyData';
 import { addItem, deleteItem, getItem } from '../../store/action/action';
 import { RenderItem, renderHiddenItem, } from './Components/RenderHiddenItem';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
 
 const MyCart = ({ navigation }) => {
-  const [myCarts, setmyCarts] = useState(0)
+  const [myCarts, setmyCarts] = useState([])
   useEffect(() => {
-    getData()
+    // getData()
   }, [])
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getData()
+
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   const getData = async () => {
 
     const myCart = await getItem('myCart');
@@ -41,6 +52,7 @@ const MyCart = ({ navigation }) => {
       console.log(JSON.parse(myCart), 'myCart',)
       setmyCarts(JSON.parse(myCart))
     } else {
+      setmyCarts([])
     }
   }
   return (
@@ -103,7 +115,10 @@ const MyCart = ({ navigation }) => {
           </View>
           <View style={styles.row}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('CheckOut', myCarts)}
+              activeOpacity={.8}
+              onPress={() => {
+                if (myCarts.length > 0) navigation.navigate('CheckOut', myCarts)
+              }}
               style={styles.checkOutContainer}>
               <Title
                 type={`Poppin-16`}

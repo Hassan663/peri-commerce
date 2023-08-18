@@ -20,7 +20,9 @@ import {
 import Title from '../../../components/Title';
 
 export const RenderItem = ({ data, rowMap, }) => {
-    const [noOfItem, setNoOfItem] = useState(0)
+    const [noOfItem, setNoOfItem] = useState(data?.item?.noOfItem)
+    // console.log(data?.item.noOfItem
+    //     , 'data?.item')
     return (
 
         <View style={styles.rowFront}>
@@ -41,10 +43,10 @@ export const RenderItem = ({ data, rowMap, }) => {
                         title={data?.item?.company} />
                 </View>
                 <View style={styles.cartItemContentBody}>
-                    <Title type={`Poppin-14`} color={Colors.primary} weight={`700`} title={data?.item?.price} />
+                    <Title type={`Poppin-14`} color={Colors.primary} weight={`700`} title={(Number(data?.item?.price) * noOfItem).toFixed(2)} />
                     <View style={[styles.noOfItemWrapper, styles.mr2]}>
                         <AntDesign
-                            onPress={() => noOfItem > 0 && setNoOfItem(noOfItem - 1)}
+                            onPress={() => noOfItem > 1 && setNoOfItem(noOfItem - 1)}
                             color={Colors.primary}
                             name={'minus'}
                             size={RFPercentage(2)} />
