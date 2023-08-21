@@ -24,7 +24,8 @@ const ProductDetail = ({ navigation, route }) => {
   const [selectSize, setSelectSize] = useState("")
   const [selectColor, setSelectColor] = useState("")
   const productDetail = route?.params?.item
-
+  const selectedProductId = route?.params?.selectedProductId
+  // console.log(productDetail, 'productDetail', params.selectedProductId)
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.itemImgContainer}>
@@ -104,15 +105,17 @@ const ProductDetail = ({ navigation, route }) => {
             <Title title={`Size`} color={Colors.primary} weight={'600'} type={`Poppin-16`} />
 
             <View style={styles.sizeContainer}>
-              {productDetail?.value?.size?.map((item, index) => (
-                <TouchableOpacity
-                  key={index.toString()}
-                  activeOpacity={.8}
-                  onPress={() => setSelectSize(item)}
-                  style={styles.circle(40, selectSize == item ? Colors.primary : Colors.white, 2)}>
-                  <Title title={item} color={selectSize == item ? Colors.white : Colors.primary} weight={'600'} type={`Poppin-14`} />
-                </TouchableOpacity>
-              ))}
+              {selectedProductId !== 'mobile' &&
+                productDetail?.value?.size?.map((item, index) => (
+                  <TouchableOpacity
+                    key={index.toString()}
+                    activeOpacity={.8}
+                    onPress={() => setSelectSize(item)}
+                    style={styles.circle(40, selectSize == item ? Colors.primary : Colors.white, 2)}>
+                    <Title title={item} color={selectSize == item ? Colors.white : Colors.primary} weight={'600'} type={`Poppin-14`} />
+                  </TouchableOpacity>
+                ))
+              }
             </View>
           </View>
           <View style={styles.selectColorContainer}>
@@ -163,7 +166,9 @@ const ProductDetail = ({ navigation, route }) => {
           </View>
           <TouchableOpacity
             onPress={async () => {
-              if (selectSize && selectColor) {
+              if (
+                selectedProductId == 'mobile' && selectColor ||
+                selectedProductId !== 'mobile' && selectSize && selectColor) {
 
                 const currentUserUid = auth().currentUser?.uid;
                 const myCartObj = {}
@@ -189,7 +194,13 @@ const ProductDetail = ({ navigation, route }) => {
                   navigation.navigate('MyCart')
                 }
               } else {
-                alert('please select size or color', 'item',)
+                if (selectedProductId == 'mobile') {
+                  alert('please select color')
+
+                } else {
+
+                  alert('please select size or color')
+                }
 
               }
               // myCartObj.company =

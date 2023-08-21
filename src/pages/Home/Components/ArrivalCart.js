@@ -10,12 +10,14 @@ import Title from '../../../components/Title';
 import Colors from '../../../styles/Colors';
 import { styles } from '../styles';
 
-export const ArrivalCart = ({ item, navigation, category }) => {
+export const ArrivalCart = ({ item, navigation, selectedProduct, category }) => {
     if (category) {
         var photoURL = item?.value?.photoURL
         var name = item?.value?.name
         var price = item?.value?.price
         var keys = item.key
+        var selectedProductId = selectedProduct?.id
+        // console.log(item?.value, '?.subcategories', selectedProduct.id)
     } else if (item?.data?.subcategories) {
         var keys = Object.keys(item?.data?.subcategories);
         if (keys.length > 0) {
@@ -32,7 +34,7 @@ export const ArrivalCart = ({ item, navigation, category }) => {
             onPress={() => {
                 if (navigation) {
                     if (category) {
-                        navigation.navigate('ProductDetail', { item })
+                        navigation.navigate('ProductDetail', { item, selectedProductId })
                     }
                     else {
                         navigation.navigate('Category', { item })

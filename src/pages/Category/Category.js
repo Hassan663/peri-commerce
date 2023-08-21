@@ -121,7 +121,7 @@ const Category = ({ navigation, route }) => {
         contentContainerStyle={styles.listContainer2}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         renderItem={(item) => {
-          return (<ArrivalCart item={item.item} category navigation={navigation} />)
+          return (<ArrivalCart  selectedProduct={selectedProduct} item={item.item} category navigation={navigation} />)
         }}
         keyExtractor={(item, index) => index.toString()}
       />

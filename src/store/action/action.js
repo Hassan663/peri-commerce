@@ -19,10 +19,7 @@ export const getNotification = () => {
         var productsArray = myOrders.reduce(function(result, obj) {
           return result.concat(obj.Products);
         }, []);
-        // console.log(productsArray,'productsArray')
-        // var productsArray = myOrders.map(function (obj) { return obj.Products; });
-        // console.log(productsArray, 'productsArray')
-        dispatch({ type: ActionTypes.MYORDERS, payload: productsArray });
+         dispatch({ type: ActionTypes.MYORDERS, payload: productsArray });
       })
       .catch((error) => {
         console.error("Error getting documents: ", error);
