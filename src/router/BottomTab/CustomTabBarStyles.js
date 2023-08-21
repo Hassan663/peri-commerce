@@ -1,6 +1,5 @@
 import {
-    ScrollView,
-    Text,
+     Text,
     TouchableOpacity,
     View
 } from 'react-native';

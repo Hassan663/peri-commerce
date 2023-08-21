@@ -13,11 +13,14 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import auth from '@react-native-firebase/auth';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
-import { styles } from './styles';
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
+import { styles } from './styles';
 import { RATING } from './DummyData';
-import { addItem, deleteItem, getItem } from '../../store/action/action';
+import {
+  addItem,
+  getItem
+} from '../../store/action/action';
 
 const ProductDetail = ({ navigation, route }) => {
   const [noOfItem, setNoOfItem] = useState(1)
@@ -25,7 +28,7 @@ const ProductDetail = ({ navigation, route }) => {
   const [selectColor, setSelectColor] = useState("")
   const productDetail = route?.params?.item
   const selectedProductId = route?.params?.selectedProductId
-  // console.log(productDetail, 'productDetail', params.selectedProductId)
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.itemImgContainer}>

@@ -1,6 +1,8 @@
 
 // @app
-import React, { useState } from 'react';
+import React, {
+    useState
+} from 'react';
 import {
     Image,
     TouchableOpacity,
@@ -13,17 +15,15 @@ import auth from '@react-native-firebase/auth';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import Colors from '../../../styles/Colors';
+import Title from '../../../components/Title';
 import { styles } from '../styles';
 import {
     addItem,
     getItem
 } from '../../../store/action/action';
-import Title from '../../../components/Title';
 
 export const RenderItem = ({ data, rowMap, }) => {
     const [noOfItem, setNoOfItem] = useState(data?.item?.noOfItem)
-    // console.log(data?.item.noOfItem
-    //     , 'data?.item')
     return (
 
         <View style={styles.rowFront}>
@@ -78,7 +78,6 @@ export const renderHiddenItem = (data, rowMap, setmyCarts, settotalPrice) => (
                 if (myCart !== null) {
                     let myCartFilter = JSON.parse(myCart).filter((val) => val.userUid == currentUserUid)
                     let objClone = JSON.parse(JSON.stringify(myCartFilter))
-                    // console.log(myCartFilter, 'myCartFilter', objClone)
                     let getIndex = objClone.findIndex((val) => val.id == data.item.id)
                     objClone.splice(getIndex, 1)
                     let price = 0

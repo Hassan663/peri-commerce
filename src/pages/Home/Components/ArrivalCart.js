@@ -17,7 +17,6 @@ export const ArrivalCart = ({ item, navigation, selectedProduct, category }) => 
         var price = item?.value?.price
         var keys = item.key
         var selectedProductId = selectedProduct?.id
-        // console.log(item?.value, '?.subcategories', selectedProduct.id)
     } else if (item?.data?.subcategories) {
         var keys = Object.keys(item?.data?.subcategories);
         if (keys.length > 0) {
@@ -42,7 +41,6 @@ export const ArrivalCart = ({ item, navigation, selectedProduct, category }) => 
                 }
             }}
             style={styles.cartContainer}>
-            {/* <Image source={require('../../../assets/arrivalItem.png')} style={styles.cartImg} resizeMode='cover' /> */}
             <View style={styles.cartImg}>
                 <Image source={{ uri: photoURL }} style={styles.cartImg} resizeMode='contain' />
             </View>

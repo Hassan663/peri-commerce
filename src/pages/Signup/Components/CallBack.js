@@ -36,7 +36,6 @@ export const handleSignup = async (email, password, confirmPassword, firstName, 
         else if (!validateName(firstName) || !validateName(lastName)) Alert.alert('Invalid Name', 'Please enter a valid first and last name.');
         else if (password !== confirmPassword) Alert.alert('Password Mismatch', 'Passwords do not match.');
         else {
-
             // Create user with email and password
             await auth().createUserWithEmailAndPassword(email, password);
 

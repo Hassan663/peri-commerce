@@ -21,10 +21,8 @@ import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
 import Button from '../../components/Button';
 import { styles } from './styles';
-import { MYCARTDATA } from './DummyData';
-import { addItem, deleteItem, getItem } from '../../store/action/action';
+import { getItem } from '../../store/action/action';
 import { RenderItem, renderHiddenItem, } from './Components/RenderHiddenItem';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
@@ -54,7 +52,6 @@ const MyCart = ({ navigation }) => {
       myCartFilter.map((item) => { price = price + item.price })
       console.log(price, 'myCartFilter')
       settotalPrice(price)
-      // console.log(JSON.parse(myCart).filter((val) => val.userUid == currentUserUid), 'myCart', currentUserUid)
       setmyCarts(myCartFilter)
     } else {
       setmyCarts([])

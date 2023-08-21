@@ -4,42 +4,28 @@ import React, {
   useState
 } from 'react';
 import {
-  DeviceEventEmitter,
   Dimensions,
-  Image,
   SafeAreaView,
   ScrollView,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 import Title from '../../components/Title';
 import Colors from '../../styles/Colors';
-import Button from '../../components/Button';
 import { styles } from './styles';
-import { MYCARTDATA } from './DummyData';
 import { getNotification } from '../../store/action/action';
-import { RenderItem, renderHiddenItem, } from './Components/RenderHiddenItem';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch, useSelector } from 'react-redux';
-
-const windowHeight = Dimensions.get('window').height;
-const heightFlex1 = windowHeight / 10
+import { RenderItem, } from './Components/RenderHiddenItem';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
 
 const Notification = ({ navigation }) => {
   const [myCarts, setmyCarts] = useState([])
   const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(getNotification())
-  //   // getData()
-  // }, [])
-
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
