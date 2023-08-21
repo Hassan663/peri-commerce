@@ -35,12 +35,21 @@ const heightFlex1 = windowHeight / 10
 const Notification = ({ navigation }) => {
   const [myCarts, setmyCarts] = useState([])
   const dispatch = useDispatch()
+  // useEffect(() => {
+  //   dispatch(getNotification())
+  //   // getData()
+  // }, [])
+
+
   useEffect(() => {
-    dispatch(getNotification())
-    // getData()
-  }, [])
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(getNotification())
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   const myOrders = useSelector((state) => state.root.myOrders);
-  console.log(myOrders, 'myOrders')
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: RFPercentage(12) }} showsVerticalScrollIndicator={false}     >

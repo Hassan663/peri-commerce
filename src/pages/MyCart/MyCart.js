@@ -4,7 +4,6 @@ import React, {
   useState
 } from 'react';
 import {
-  DeviceEventEmitter,
   Dimensions,
   Image,
   SafeAreaView,
@@ -14,8 +13,7 @@ import {
   View,
 } from 'react-native';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import auth from '@react-native-firebase/auth';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
@@ -32,6 +30,7 @@ const windowHeight = Dimensions.get('window').height;
 const heightFlex1 = windowHeight / 10
 
 const MyCart = ({ navigation }) => {
+  const [totalPrice, settotalPrice] = useState(0)
   const [myCarts, setmyCarts] = useState([])
   useEffect(() => {
     // getData()
@@ -49,10 +48,18 @@ const MyCart = ({ navigation }) => {
 
     const myCart = await getItem('myCart');
     if (JSON.parse(myCart)?.length > 0) {
-      console.log(JSON.parse(myCart), 'myCart',)
-      setmyCarts(JSON.parse(myCart))
+      const currentUserUid = auth().currentUser?.uid;
+      let myCartFilter = JSON.parse(myCart).filter((val) => val.userUid == currentUserUid)
+      let price = 0
+      myCartFilter.map((item) => { price = price + item.price })
+      console.log(price, 'myCartFilter')
+      settotalPrice(price)
+      // console.log(JSON.parse(myCart).filter((val) => val.userUid == currentUserUid), 'myCart', currentUserUid)
+      setmyCarts(myCartFilter)
     } else {
       setmyCarts([])
+      settotalPrice(0)
+
     }
   }
   return (
@@ -83,7 +90,8 @@ const MyCart = ({ navigation }) => {
             data={myCarts}
             contentContainerStyle={styles.myCartContentContainer}
             renderItem={(data, rowMap) => <RenderItem data={data} rowMap={rowMap} />}
-            renderHiddenItem={(data, rowMap) => renderHiddenItem(data, rowMap, setmyCarts)}
+
+            renderHiddenItem={(data, rowMap) => renderHiddenItem(data, rowMap, setmyCarts, settotalPrice)}
             leftOpenValue={0}
             rightOpenValue={-50}
           />
@@ -110,7 +118,7 @@ const MyCart = ({ navigation }) => {
               type={`Poppin-20`}
               color={Colors.primary}
               weight={`600`}
-              title={`$500`} />
+              title={`$${totalPrice.toFixed(2)}`} />
 
           </View>
           <View style={styles.row}>

@@ -9,6 +9,7 @@ import {
 
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import auth from '@react-native-firebase/auth';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import Colors from '../../../styles/Colors';
@@ -66,19 +67,27 @@ export const RenderItem = ({ data, rowMap, }) => {
         </View>
     )
 }
-export const renderHiddenItem = (data, rowMap, setmyCarts) => (
+export const renderHiddenItem = (data, rowMap, setmyCarts, settotalPrice) => (
     <View style={styles.rowBack}>
         <View style={{ flex: 1, }} />
         <TouchableOpacity
             activeOpacity={0.8}
             onPress={async () => {
-                const username = await getItem('myCart');
-                if (username !== null) {
-                    let objClone = JSON.parse(JSON.parse(JSON.stringify(username)));
+                const myCart = await getItem('myCart');
+                const currentUserUid = auth().currentUser?.uid;
+                if (myCart !== null) {
+                    let myCartFilter = JSON.parse(myCart).filter((val) => val.userUid == currentUserUid)
+                    let objClone = JSON.parse(JSON.stringify(myCartFilter))
+                    // console.log(myCartFilter, 'myCartFilter', objClone)
                     let getIndex = objClone.findIndex((val) => val.id == data.item.id)
                     objClone.splice(getIndex, 1)
+                    let price = 0
+                    objClone.map((item) => { price = price + item.price })
+                    settotalPrice(price)
+
                     await addItem('myCart', JSON.stringify(objClone))
                     setmyCarts(objClone)
+
                 }
             }} style={styles.deleteContainer} >
             <MaterialIcons name={`delete`} size={RFPercentage(3)} color={Colors.white} />

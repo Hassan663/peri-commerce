@@ -35,16 +35,18 @@ export const handleSignup = async (email, password, confirmPassword, firstName, 
         if (!validateEmail(email)) Alert.alert('Invalid Email', 'Please enter a valid email address.');
         else if (!validateName(firstName) || !validateName(lastName)) Alert.alert('Invalid Name', 'Please enter a valid first and last name.');
         else if (password !== confirmPassword) Alert.alert('Password Mismatch', 'Passwords do not match.');
+        else {
 
-        // Create user with email and password
-        await auth().createUserWithEmailAndPassword(email, password);
+            // Create user with email and password
+            await auth().createUserWithEmailAndPassword(email, password);
 
-        // Update user display name
-        const user = auth().currentUser;
-        if (user) await user.updateProfile({ displayName: firstName + ' ' + lastName, });
+            // Update user display name
+            const user = auth().currentUser;
+            if (user) await user.updateProfile({ displayName: firstName + ' ' + lastName, });
 
-        // Navigate to another screen (you can customize this part)
-        navigation.navigate('Login'); // Change 'SignIn' to your actual screen name
+            // Navigate to another screen (you can customize this part)
+            navigation.navigate('Login'); // Change 'SignIn' to your actual screen name
+        }
     } catch (error) {
 
         Alert.alert(error.message)

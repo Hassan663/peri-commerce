@@ -5,6 +5,7 @@ import Colors from '../../styles/Colors';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: Colors.primary
     },
     wrapper: {},
     slide1: {
@@ -46,5 +47,12 @@ export const styles = StyleSheet.create({
         alignSelf: "center",
         alignItems: 'flex-end',
         justifyContent: "space-between"
+    },
+    splash_Icon: {
+        tintColor: Colors.white,
+        position: "absolute",
+        alignSelf: "center",
+        height: RFPercentage(25),
+        width: RFPercentage(25)
     }
 });

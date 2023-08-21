@@ -1,6 +1,6 @@
 // @app
 import React from 'react';
-import { SafeAreaView, TouchableOpacity, View, } from 'react-native';
+import { Image, SafeAreaView, TouchableOpacity, View, } from 'react-native';
 
 import Swiper from 'react-native-swiper';
 import { useRef } from 'react';
@@ -16,6 +16,10 @@ const WalkThrough = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Image
+        style={styles.splash_Icon}
+        resizeMode='contain'
+        source={require('../../assets/SplashIcon2.png')} />
       <Swiper
         showsPagination={false}
         ref={swiperRef2}
