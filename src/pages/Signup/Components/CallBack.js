@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 
 import { Alert } from "react-native";
+import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 export const handleLogin = async (email, password, navigation) => {
@@ -39,12 +40,24 @@ export const handleSignup = async (email, password, confirmPassword, firstName, 
             // Create user with email and password
             await auth().createUserWithEmailAndPassword(email, password);
 
-            // Update user display name
+            // Update user display name 
             const user = auth().currentUser;
-            if (user) await user.updateProfile({ displayName: firstName + ' ' + lastName, });
-
-            // Navigate to another screen (you can customize this part)
-            navigation.navigate('Login'); // Change 'SignIn' to your actual screen name
+            if (user) {
+                let displayName = firstName + ' ' + lastName;
+                await user.updateProfile({ displayName });
+                let userDocObj = {
+                    email,
+                    firstName,
+                    lastName,
+                    displayName,
+                    socialAuth: false,
+                    currentUserUid: user.uid
+                }
+                console.log(user, 'useruser', userDocObj)
+                const collectionRef = await firestore().collection('users');
+                await collectionRef.add(userDocObj);
+            }
+            navigation.navigate('Login');
         }
     } catch (error) {
 
