@@ -22,7 +22,7 @@ import {
     getItem
 } from '../../../store/action/action';
 
-export const RenderItem = ({ data, rowMap, }) => {
+export const RenderItem = ({ data, rowMap, settotalPrice, totalPrice }) => {
     const [noOfItem, setNoOfItem] = useState(data?.item?.noOfItem)
     return (
 
@@ -47,7 +47,13 @@ export const RenderItem = ({ data, rowMap, }) => {
                     <Title type={`Poppin-14`} color={Colors.primary} weight={`700`} title={(Number(data?.item?.price) * noOfItem).toFixed(2)} />
                     <View style={[styles.noOfItemWrapper, styles.mr2]}>
                         <AntDesign
-                            onPress={() => noOfItem > 1 && setNoOfItem(noOfItem - 1)}
+                            onPress={() => {
+                                if (noOfItem > 1) {
+                                    setNoOfItem(noOfItem - 1)
+                                    let newPrice = Number(totalPrice) - Number(data?.item?.price)
+                                    settotalPrice(newPrice)
+                                }
+                            }}
                             color={Colors.primary}
                             name={'minus'}
                             size={RFPercentage(2)} />
@@ -57,7 +63,11 @@ export const RenderItem = ({ data, rowMap, }) => {
                             weight={'400'}
                             type={`Poppin-14`} />
                         <AntDesign
-                            onPress={() => noOfItem < 10 && setNoOfItem(noOfItem + 1)}
+                            onPress={() => {
+                                noOfItem < 10 && setNoOfItem(noOfItem + 1)
+                                let newPrice = Number(totalPrice) + Number(data?.item?.price)
+                                settotalPrice(newPrice)
+                            }}
                             color={Colors.primary}
                             name={'plus'}
                             size={RFPercentage(2)} />

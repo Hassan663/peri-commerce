@@ -49,8 +49,7 @@ const MyCart = ({ navigation }) => {
       const currentUserUid = auth().currentUser?.uid;
       let myCartFilter = JSON.parse(myCart).filter((val) => val.userUid == currentUserUid)
       let price = 0
-      myCartFilter.map((item) => { price = price + item.price })
-      console.log(price, 'myCartFilter')
+      myCartFilter.map((item) => { price = price + (item?.price * item?.noOfItem) })
       settotalPrice(price)
       setmyCarts(myCartFilter)
     } else {
@@ -86,7 +85,7 @@ const MyCart = ({ navigation }) => {
           <SwipeListView
             data={myCarts}
             contentContainerStyle={styles.myCartContentContainer}
-            renderItem={(data, rowMap) => <RenderItem data={data} rowMap={rowMap} />}
+            renderItem={(data, rowMap) => <RenderItem totalPrice={totalPrice} settotalPrice={settotalPrice} data={data} rowMap={rowMap} />}
 
             renderHiddenItem={(data, rowMap) => renderHiddenItem(data, rowMap, setmyCarts, settotalPrice)}
             leftOpenValue={0}
