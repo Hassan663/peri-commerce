@@ -143,14 +143,14 @@ const Signup = ({ navigation }) => {
             type={'Poppin-14'} />
         </View>
 
-        <View style={styles.rowWrapper}>
+        {/* <View style={styles.rowWrapper}>
           <TouchableOpacity style={styles.circle}>
             <EvilIcons name={`sc-facebook`} size={RFPercentage(3.2)} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.circle}>
             <AntDesign name={`google`} size={RFPercentage(2)} />
           </TouchableOpacity>
-        </View>
+        </View> */}
 
       </ScrollView>
     </SafeAreaView >
