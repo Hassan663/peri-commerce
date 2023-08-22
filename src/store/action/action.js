@@ -9,14 +9,28 @@ import {
   statusCodes
 } from '@react-native-google-signin/google-signin';
 
-export const SignIn = async () => {
+export const GoogleSignIn = async () => {
   try {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     const { idToken } = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    console.log(googleCredential, 'googleCredential')
-    let respons = await auth().signInWithCredential(googleCredential)
-    console.log(googleCredential, 'googleCredential', respons)
+    let userInfo = await auth().signInWithCredential(googleCredential)
+    if (userInfo?.additionalUserInfo?.isNewUser == true) {
+      if (userInfo.user) {
+        let userDocObj = {
+          email: userInfo?.user?.email,
+          lastName: userInfo?.additionalUserInfo?.profile?.family_name,
+          firstName: userInfo?.additionalUserInfo?.profile?.given_name,
+          photoURL: userInfo?.user?.photoURL,
+          displayName: userInfo?.user?.displayName,
+          socialAuth: true,
+          currentUserUid: userInfo?.user?.uid
+        }
+        const collectionRef = await firestore().collection('users');
+        await collectionRef.add(userDocObj);
+
+      }
+    }
   } catch (error) {
     console.log(error, 'error')
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {

@@ -13,7 +13,7 @@ import {
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, } from '@react-native-google-signin/google-signin';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import Title from '../../components/Title';
@@ -22,7 +22,7 @@ import OutlinedTextInput from './Components/OutlinedTextInput';
 import Button from '../../components/Button';
 import { styles } from './styles';
 import { handleLogin } from './Components/CallBack';
-import { SignIn } from '../../store/action/action';
+import { GoogleSignIn, } from '../../store/action/action';
 
 GoogleSignin.configure({
   webClientId:
@@ -110,7 +110,7 @@ const Login = ({ navigation }) => {
             <EvilIcons name={`sc-facebook`} size={RFPercentage(3.2)} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={SignIn}
+            onPress={GoogleSignIn}
             style={styles.circle}>
             <AntDesign name={`google`} size={RFPercentage(2)} />
           </TouchableOpacity>
