@@ -4,6 +4,33 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ActionTypes from '../constant/constant';
 
+import {
+  GoogleSignin,
+  statusCodes
+} from '@react-native-google-signin/google-signin';
+
+export const SignIn = async () => {
+  try {
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    const { idToken } = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    console.log(googleCredential, 'googleCredential')
+    let respons = await auth().signInWithCredential(googleCredential)
+    console.log(googleCredential, 'googleCredential', respons)
+  } catch (error) {
+    console.log(error, 'error')
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      // user cancelled the login flow
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+      // operation (e.g. sign in) is in progress already
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      // play services not available or outdated
+    } else {
+      // some other error happened
+    }
+  }
+};
+
 export const getNotification = () => {
   return async (dispatch) => {
     firestore().collection('order').get()
@@ -16,10 +43,10 @@ export const getNotification = () => {
         const currentUserUid = auth().currentUser?.uid;
         let myOrders = allOrder.filter((val) => val?.orderBy?.currentUserUid == currentUserUid)
         console.log(myOrders, 'myOrders')
-        var productsArray = myOrders.reduce(function(result, obj) {
+        var productsArray = myOrders.reduce(function (result, obj) {
           return result.concat(obj.Products);
         }, []);
-         dispatch({ type: ActionTypes.MYORDERS, payload: productsArray });
+        dispatch({ type: ActionTypes.MYORDERS, payload: productsArray });
       })
       .catch((error) => {
         console.error("Error getting documents: ", error);
