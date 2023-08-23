@@ -1,4 +1,7 @@
 {
   "name": "PeriCommerce",
-  "displayName": "PeriCommerce"
+  "displayName": "PeriCommerce",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-3340464236132360~3155684013"
+  }
 }
