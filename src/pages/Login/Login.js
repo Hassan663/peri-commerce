@@ -31,8 +31,8 @@ GoogleSignin.configure({
 
 const Login = ({ navigation }) => {
 
-  const [email, setEmail] = useState('mynameismuzammilhussainshah@gmail.com');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>

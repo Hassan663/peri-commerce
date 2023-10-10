@@ -15,6 +15,7 @@ export const GoogleSignIn = async () => {
     const { idToken } = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     let userInfo = await auth().signInWithCredential(googleCredential)
+    console.log(userInfo, `userInfo`)
     if (userInfo?.additionalUserInfo?.isNewUser == true) {
       if (userInfo.user) {
         let userDocObj = {

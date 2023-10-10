@@ -23,11 +23,11 @@ import { handleSignup } from './Components/CallBack';
 
 const Signup = ({ navigation }) => {
 
-  const [email, setEmail] = useState('mynameismuzammilhussainshah@gmail.com');
-  const [firstName, setFirstName] = useState('muzammil ');
-  const [lastName, setLastName] = useState('shah');
-  const [password, setPassword] = useState('123456');
-  const [confirmPassword, setConfirmPassword] = useState('12345');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isCheck, setisCheck] = useState(false);
 
   return (

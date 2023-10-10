@@ -22,7 +22,7 @@ import { handleResetPassword } from './Components/CallBack';
 
 const ForgetPass = ({ navigation }) => {
 
-  const [email, setEmail] = useState('mynameismuzammilhussainshah@gmail.com');
+  const [email, setEmail] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
